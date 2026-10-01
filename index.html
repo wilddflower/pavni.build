@@ -158,7 +158,7 @@
   .paper-icon::after { content: ""; position: absolute; left: 9%; right: 9%; top: 5%; height: 46%; border-radius: 18px 18px 50% 50%; background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,0)); pointer-events: none; }
   .paper-icon.is-img { width: 96px; height: 96px; border-radius: 26px; background: #dddddd; box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 0 0 1px rgba(0,0,0,.04), 0 12px 26px -10px rgba(22,34,79,.35); }
   .paper-icon.is-img::after { opacity: .45; }
-  .paper-icon.is-img img { display: block; width: 100%; height: 100%; }
+  .paper-icon.is-img img { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
   .paper-icon svg { position: relative; z-index: 1; width: 46px; height: 46px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.2)); }
   .paper h2 { margin: 26px 0 0; font-size: clamp(36px, 5.4vw, 60px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.04; }
   .paper-tag { margin: 18px auto 0; max-width: 40em; font-size: clamp(17px, 1.7vw, 20px); line-height: 1.45; letter-spacing: -0.015em; color: #6b7086; }
@@ -470,7 +470,7 @@
       <span class="sheet"><span class="shot-empty" aria-hidden="true"><i></i><i></i><i></i></span></span>
       <span class="front">
         <span class="row"><span class="title">Mochi</span><span class="yr">2026</span></span>
-        <span class="sum">A focus timer that keeps me on task.</span>
+        <span class="sum">A pixel productivity bunny who lives on my taskbar and gets upset when I am off task.</span>
         <span class="go">Open ↗</span>
       </span>
     </a>
@@ -868,9 +868,9 @@
       links: [["Live", "#"], ["Code", "#"]],
     },
     mochi: {
-      icon: "timer",
+      icon: "timer", iconImg: "mochi-icon.png", iconBg: "#eef1ff",
       title: "Mochi",
-      tag: "A focus timer that keeps me on task. [one more line on what makes it different]",
+      tag: "A pixel productivity bunny who lives on my taskbar and gets upset when I am off task.",
       meta: [["Type", "[e.g. Web app]"], ["Role", "[e.g. Designer & Developer]"], ["Year", "2026"]],
       imgs: [],
       why: "[why you made it: why other focus timers didn’t work for you]",
@@ -917,7 +917,7 @@
     paperBody.innerHTML = `
       <header class="paper-head">
         ${c.iconImg
-          ? `<div class="paper-icon is-img"><img src="assets/works/${esc(c.iconImg)}" alt="" width="384" height="384"></div>`
+          ? `<div class="paper-icon is-img"${c.iconBg ? ` style="background:${esc(c.iconBg)}"` : ""}><img src="assets/works/${esc(c.iconImg)}" alt="" width="384" height="384"></div>`
           : `<div class="paper-icon">${icons[c.icon] || icons.sparkle}</div>`}
         <h2 id="paper-title">${esc(c.title)}</h2>
         <p class="paper-tag"${t(c.tag)}>${esc(c.tag)}</p>
