@@ -871,12 +871,19 @@
       icon: "timer", iconImg: "mochi-icon.png", iconBg: "#eef1ff",
       title: "Mochi",
       tag: "A pixel productivity bunny who lives on my taskbar and gets upset when I am off task.",
-      meta: [["Type", "[e.g. Web app]"], ["Role", "[e.g. Designer & Developer]"], ["Year", "2026"]],
+      meta: [["Type", "Windows desktop app"], ["Role", "Designer & Developer"], ["Year", "2026"]],
       imgs: [],
-      why: "[why you made it: why other focus timers didn’t work for you]",
-      features: [["[Feature]", "[what it does]"], ["[Feature]", "[what it does]"]],
-      stack: [["[Frontend]", "[tools]"], ["[Backend]", "[tools]"]],
-      links: [["Live", "#"], ["Code", "#"]],
+      story: [
+        ["What I Made", ["I wanted a focus tool that didn’t feel like punishment. Website blockers are easy to switch off, but it’s a lot harder to ignore a little bunny you care about. So I drew Mochi, gave her a spot on my taskbar, and built a desktop app around her."]],
+        ["What It Does", ["Mochi watches which app or site I’m on. When I’m working, she’s happy and cheers me on. When I drift off task, she gets sad, then angry, and after 5 minutes a full-screen blocker steps in. Before a session I tell her which task I’m doing, and if I try to end early, she makes me get past her first two excuses. Staying focused earns carrots I can spend on little outfits for her."]],
+      ],
+      stack: [
+        ["App", "Electron, HTML, CSS, JavaScript"],
+        ["Tracking", "a PowerShell script that checks which app I’m in every 2.5 seconds"],
+        ["Storage", "everything stays on my laptop, with no accounts"],
+        ["Testing", "Jest, 64 tests"],
+      ],
+      links: [["Code", "https://github.com/wilddflower/mochi"]],
     },
     "this-site": {
       icon: "sparkle",
@@ -933,8 +940,8 @@
         <div>
           ${(c.story || [["Why I Built It", [c.why]]]).map(([head, paras]) =>
             `<section class="paper-sec"><h3>${esc(head)}</h3>${paras.map(x => `<p${t(x)}>${esc(x)}</p>`).join("")}</section>`).join("")}
-          <section class="paper-sec"><h3>Features</h3>${list(c.features)}</section>
-          <section class="paper-sec"><h3>Tech Stack</h3>${list(c.stack)}</section>
+          ${c.features && c.features.length ? `<section class="paper-sec"><h3>Features</h3>${list(c.features)}</section>` : ""}
+          ${c.stack && c.stack.length ? `<section class="paper-sec"><h3>Tech Stack</h3>${list(c.stack)}</section>` : ""}
         </div>
       </div>`;
     paperDlg.scrollTop = 0;
