@@ -3,8 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>pavni.build</title>
-<meta name="description" content="pavni — builder, creative, dreamer, doer. open to winter ’27 and summer ’27 internships.">
+<title>Pavni Labade · pavni.build</title>
+<meta name="description" content="Pavni Labade, a second-year Business + Computer Science student at UBC. Builder, creative, dreamer, doer. Open to winter &amp; summer ’27 internship opportunities.">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pavni Labade">
+<meta property="og:description" content="Builder, creative, dreamer, doer. Business + CS @ UBC, open to winter &amp; summer ’27 internship opportunities.">
+<!-- TODO: once the site is live, make this the full address, e.g. https://pavni.build/assets/og.jpg -->
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
@@ -13,10 +25,10 @@
   :root {
     --paper: #ffffff;
     --ink: #1d1d1f;
-    --mute: #5563b0;
+    --mute: #5b6ac6;   /* the one accent blue: periwinkle */
     --line: #e3e7fb;
-    --blue: #4a63f0;
-    --peri: #6270c8;
+    --blue: #4a63f0;   /* interactive: hovers + links */
+    --peri: #5b6ac6;
     --blue-50: #f5f7ff;
     --blue-100: #e8ecff;
     --blue-200: #d3daff;
@@ -35,7 +47,7 @@
 
   /* top bar: centred links, frosted once you scroll */
   .bar { position: fixed; top: 0; left: 0; right: 0; z-index: 10; height: 72px; pointer-events: none; border-bottom: 1px solid transparent; transition: background-color .3s, border-color .3s; }
-  .bar.scrolled { background: rgba(255,255,255,.72); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom-color: rgba(0,0,0,.06); }
+  .bar.scrolled { background: rgba(255,255,255,.94); -webkit-backdrop-filter: saturate(160%) blur(12px); backdrop-filter: saturate(160%) blur(12px); border-bottom-color: rgba(0,0,0,.06); }
   .bar nav { height: 100%; max-width: 1240px; margin: 0 auto; padding: 16px 40px 0; display: flex; justify-content: center; align-items: center; gap: 32px; font-size: 14px; font-weight: 500; letter-spacing: -0.02em; }
   .bar a { pointer-events: auto; color: var(--peri); text-decoration: none; text-underline-offset: 5px; text-decoration-thickness: 1px; transition: opacity .2s, color .2s; }
   .bar a:hover { color: var(--blue); text-decoration: underline; text-decoration-color: var(--blue); }
@@ -46,18 +58,27 @@
   .hero-in { height: 100vh; height: 100svh; min-height: 520px; display: flex; align-items: center; justify-content: space-between; gap: clamp(32px, 4vw, 64px); max-width: 1240px; margin: 0 auto; padding: calc(72px + 2vh) 40px calc(48px + 3vh); position: relative; }
   .hello h1 { font-weight: 600; }
   .hi { display: block; font-size: clamp(20px, 2vw, 26px); font-weight: 500; color: var(--mute); letter-spacing: -0.02em; }
-  .name { display: block; font-size: clamp(72px, min(12.5vw, 21vh), 190px); letter-spacing: -0.055em; line-height: 1; margin: 0 0 16px -0.04em; padding-bottom: .06em; }
+  .name { display: block; font-size: clamp(72px, min(11.5vw, 19.5vh), 180px); letter-spacing: -0.055em; line-height: 1; margin: 0 0 16px -0.04em; padding-bottom: .06em; }
   .roles .lead { color: var(--ink); }
   .roles { font-size: clamp(20px, 2vw, 26px); font-weight: 500; color: var(--mute); letter-spacing: -0.022em; line-height: 1.3; }
   .meta { margin-top: 28px; font-size: 15px; color: var(--mute); line-height: 1.7; letter-spacing: -0.01em; }
   .meta b { color: var(--ink); font-weight: 500; white-space: nowrap; }
+  .meta .nw { white-space: nowrap; }
   .meta a { color: inherit; text-decoration: underline; text-decoration-color: var(--peri); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .2s, text-decoration-color .2s; }
   .meta a:hover { color: var(--blue); text-decoration-color: var(--blue); }
+  /* availability badge + the two things a recruiter wants: resume and email */
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 18px; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; height: 42px; padding: 0 20px; border-radius: 980px; border: 1.5px solid var(--blue-200); background: #fff; color: var(--ink); font-size: 15px; font-weight: 500; letter-spacing: -0.015em; text-decoration: none; white-space: nowrap; transition: background-color .2s, border-color .2s, color .2s, transform .25s cubic-bezier(.34,1.56,.64,1); }
+  .btn:hover { border-color: var(--peri); color: var(--peri); transform: translateY(-1px); }
+  .btn.primary { background: var(--peri); border-color: var(--peri); color: #fff; }
+  .btn.primary:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 
   /* name hops in letter by letter, roles word by word (spans added by the script below) */
   .word { display: inline-block; white-space: nowrap; }
   .js .ch { display: inline-block; animation: hop .8s cubic-bezier(.34,1.56,.64,1) both; }
   .js .meta { animation: rise .8s ease 1.4s both; }
+  .js .cta { animation: rise .8s ease 1.6s both; }
   @keyframes hop { from { opacity: 0; transform: translateY(.5em) scale(.92); } to { opacity: 1; transform: none; } }
   @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
@@ -71,6 +92,7 @@
   .section { max-width: 1240px; margin: 0 auto; padding: 120px 40px; }
   .label { font-size: 14px; font-weight: 500; color: var(--mute); letter-spacing: -0.01em; }
   /* section headings: big like a new slide, same style as the giant name */
+  .heading.sm { font-size: clamp(52px, min(7.5vw, 13vh), 110px); }
   .heading { margin: 0 0 0 -0.04em; font-size: clamp(64px, min(11vw, 18vh), 160px); font-weight: 600; letter-spacing: -0.055em; line-height: .95; color: var(--peri); }
 
   /* works: a sideways shelf of folders */
@@ -85,10 +107,12 @@
   .seg { display: inline-flex; gap: 4px; padding: 4px; border-radius: 980px; background: #eef1ff; }
   .seg { transition: background-color .3s; }
   .seg[data-active="experience"] { background: #e8ebf7; }
-  .seg[data-active="other"] { background: #e9edff; }
+  .seg[data-active="leadership"] { background: #e9edff; }
   .seg button[data-seg="projects"] { --seg: var(--peri); }
   .seg button[data-seg="experience"] { --seg: #1f2d66; }
-  .seg button[data-seg="other"] { --seg: #3a53d9; }
+  .seg button[data-seg="leadership"] { --seg: #3a53d9; }
+  /* a touch deeper while it isn't selected, so it stays readable on the tinted track */
+  .seg button[data-seg="projects"][aria-selected="false"] { color: #4f5fbd; }
   .seg button { font: inherit; font-size: 15px; font-weight: 500; letter-spacing: -0.015em; color: var(--seg); background: none; border: 0; border-radius: 980px; padding: 9px 20px; min-height: 40px; cursor: pointer; transition: background-color .25s, color .25s, box-shadow .25s; }
   .seg button:hover { background: rgba(255,255,255,.75); }
   .seg button[aria-selected="true"] { background: var(--seg); color: #fff; box-shadow: 0 1px 2px rgba(31,45,102,.2), 0 4px 12px rgba(31,45,102,.18); }
@@ -99,46 +123,38 @@
   /* experience: a row of navy-tinted cards; the one you point at opens up to show the details */
   .panel { max-width: 1240px; margin: 0 auto; padding: 48px 40px 24px; }
   [role="tabpanel"][hidden] { display: none; }
-  .xp-row { display: flex; gap: 16px; height: 320px; }
-  .xp { position: relative; isolation: isolate; overflow: hidden; flex: 1 1 0; min-width: 0; border-radius: 26px; padding: 26px 28px 24px; background: #dfe5fb; color: #1f2d66; cursor: pointer; transition: flex-grow .6s cubic-bezier(.3,.7,.3,1), background-color .4s; }
-  .xp::before, .xp::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; background: rgba(255,255,255,.5); transition: transform .6s cubic-bezier(.3,.7,.3,1); }
-  .xp::before { width: 150px; height: 150px; left: -40px; bottom: -50px; }
-  .xp::after { width: 64px; height: 64px; left: 84px; bottom: 60px; }
-  .xp.on { flex-grow: 2.3; background: #f1f3fa; cursor: default; }
-  .xp.on::before { transform: scale(1.25); }
-  .xp-text { position: relative; height: 100%; display: flex; flex-direction: column; max-width: 100%; transition: max-width .6s; }
-  .xp.on .xp-text { max-width: 50%; }
-  .xp-when { min-height: 1.5em; font-size: 13px; font-weight: 500; color: #1f2d66; letter-spacing: 0; }
-  .xp-title { margin-top: 6px; font-size: clamp(22px, 2vw, 28px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: #16224f; }
-  .xp-desc { margin-top: 12px; font-size: 15px; line-height: 1.45; color: #46508f; opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .35s; }
-  .xp.on .xp-desc { opacity: 1; transform: none; transition-delay: .2s; }
-  .xp-foot { margin-top: auto; display: flex; align-items: center; gap: 14px; font-size: 14px; font-weight: 500; color: #1f2d66; }
-  .xp-go { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: #1f2d66; box-shadow: 0 1px 2px rgba(0,0,0,.08); transition: background-color .3s, color .3s, transform .3s; }
-  .xp.on .xp-go { background: #1f2d66; color: #fff; }
-  .xp-go:hover { transform: rotate(45deg); }
-  .xp-go:focus-visible { outline: 2px solid #1f2d66; outline-offset: 3px; }
-  .xp-pic { position: absolute; top: 18px; right: 18px; bottom: 18px; width: calc(46% - 18px); border-radius: 18px; overflow: hidden; background: #fff; opacity: 0; transform: translateX(24px) scale(.96); transition: opacity .35s, transform .5s cubic-bezier(.3,.7,.3,1); }
-  .xp.on .xp-pic { opacity: 1; transform: none; transition-delay: .18s; }
-  .xp-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .xp-pic .shot-empty { background: #f5f7ff; }
-  .xp-pic .shot-empty i { background: #dfe5fb; }
+  /* experience: a LinkedIn-style list, straight from my resume */
+  .jobs { max-width: 880px; padding: 4px 32px; border-radius: 26px; background: #fff; border: 1px solid #e6e9f6; box-shadow: 0 1px 2px rgba(31,45,102,.04), 0 22px 44px -30px rgba(31,45,102,.35); }
+  .job { display: grid; grid-template-columns: 52px minmax(0, 1fr); column-gap: 18px; }
+  .job-logo { display: block; width: 52px; height: 52px; margin-top: 26px; border-radius: 12px; object-fit: cover; background: #fff; box-shadow: 0 0 0 1px rgba(31,45,102,.08); }
+  .job-body { min-width: 0; padding: 26px 0 28px; }
+  .job + .job .job-body { border-top: 1px solid #edf0f8; }
+  .job-title { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; color: #16224f; }
+  .job-org { margin: 2px 0 0; font-size: 15px; color: #1f2d66; }
+  .job-org a { color: inherit; font-weight: 500; text-decoration: none; }
+  .job-org a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .job-org a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+  .job-when { margin: 2px 0 0; font-size: 14px; color: #6b7086; font-variant-numeric: tabular-nums; }
+  .job-points { margin: 14px 0 0; padding-left: 18px; display: grid; gap: 8px; max-width: 70ch; }
+  .job-points li { padding-left: 3px; font-size: 15.5px; line-height: 1.55; color: #3d4256; }
+  .job-points li::marker { color: var(--peri); }
+  .job-points b { font-weight: 600; color: #16224f; }
+  /* a project attached to a role, like the media on a LinkedIn entry; the page flies out of the thumbnail */
+  .job-media { margin-top: 18px; display: inline-flex; align-items: center; gap: 14px; padding: 8px 20px 8px 8px; border-radius: 16px; border: 1px solid #e6e9f6; color: #16224f; text-decoration: none; transition: border-color .2s, box-shadow .25s, transform .25s cubic-bezier(.34,1.56,.64,1); }
+  .job-media:hover { border-color: #cfd6f3; box-shadow: 0 10px 22px -14px rgba(31,45,102,.4); transform: translateY(-1px); }
+  .job-media:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .job-thumb { flex: none; width: 112px; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px rgba(31,45,102,.08); }
+  .job-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .job-media-text { display: grid; gap: 2px; font-size: 14.5px; font-weight: 600; letter-spacing: -0.01em; }
+  .job-media-text span { font-size: 13px; font-weight: 400; color: #6b7086; }
 
-  /* other: gradient cards with a keepsake spilling out of the left side */
-  .oc-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 44px 32px; padding-top: 16px; }
-  .oc { position: relative; min-width: 0; height: 236px; border-radius: 30px; color: #fff; text-decoration: none; isolation: isolate;
-    background: radial-gradient(110% 130% at 88% 0%, rgba(143,163,255,.9) 0%, rgba(143,163,255,0) 55%), linear-gradient(135deg, #1f33a8 0%, #3a53d9 48%, #7189ff 100%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 20px 40px -20px rgba(31,51,168,.6); }
-  .oc::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; opacity: .18; mix-blend-mode: soft-light;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-  .oc-art { position: absolute; left: var(--al, -18px); bottom: var(--ab, -18px); width: var(--aw, 44%); transform: rotate(var(--ar, -8deg)); filter: drop-shadow(0 10px 14px rgba(10,20,80,.35)); transition: transform .5s cubic-bezier(.3,.7,.3,1); pointer-events: none; }
-  .oc-art img { display: block; width: 100%; height: auto; }
-  .oc:hover .oc-art, .oc:focus-visible .oc-art { transform: rotate(calc(var(--ar, -8deg) + 4deg)) translateY(-8px) scale(1.04); }
-  .oc-title { position: absolute; top: 26px; right: 28px; max-width: 64%; text-align: right; font-size: clamp(21px, 1.8vw, 25px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; }
-  .oc-title small { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 500; letter-spacing: 0; opacity: .85; }
-  .oc-foot { position: absolute; right: 24px; bottom: 24px; display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 500; }
-  .oc-foot i { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: #1f2d66; transition: transform .35s cubic-bezier(.3,.7,.3,1); }
-  .oc:hover .oc-foot i, .oc:focus-visible .oc-foot i { transform: rotate(45deg); }
-  .oc:focus-visible { outline: 3px solid #3a53d9; outline-offset: 4px; }
+  /* leadership: quiet cards in the site's blues (the keepsakes stay in the hero) */
+  .oc-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding-top: 8px; }
+  .oc { position: relative; min-width: 0; min-height: 210px; border-radius: 26px; padding: 26px 28px 28px; display: flex; flex-direction: column; color: #1f2d66; background: linear-gradient(160deg, #f3f5ff 0%, #e2e7ff 100%); border: 1px solid #e3e7fb; }
+  .oc-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: #fff; color: var(--peri); box-shadow: 0 1px 2px rgba(31,45,102,.08), 0 8px 18px -8px rgba(31,45,102,.3); }
+  .oc-icon svg { width: 22px; height: 22px; }
+  .oc-role { margin-top: auto; padding-top: 28px; font-size: 13px; font-weight: 500; color: #46508f; letter-spacing: 0; }
+  .oc-name { margin-top: 6px; font-size: clamp(21px, 1.8vw, 25px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: #16224f; }
 
   /* project paper: flies out of its folder and opens as a clean project page */
   html.paper-open { overflow: hidden; }
@@ -171,7 +187,16 @@
   /* screenshots slide past on a loop as glossy tiles; hover to pause */
   .paper figure.is-loop { height: clamp(200px, min(30vw, 42vh), 440px); padding: 10px 0 24px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
   .pg-run { display: flex; height: 100%; width: max-content; animation: pg-loop calc(var(--n) * 5s) linear infinite; }
-  .is-loop:hover .pg-run { animation-play-state: paused; }
+  .is-loop:hover .pg-run, .pg.paused .pg-run { animation-play-state: paused; }
+  .pg { position: relative; }
+  /* play / pause for the moving strip, a little frosted button */
+  .pg-toggle { position: absolute; right: calc(6% + 6px); bottom: 36px; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%; display: grid; place-items: center; color: #1f2d66; cursor: pointer;
+    background: rgba(255,255,255,.8); -webkit-backdrop-filter: saturate(180%) blur(10px); backdrop-filter: saturate(180%) blur(10px);
+    box-shadow: inset 0 1px 0 #fff, 0 0 0 .5px rgba(31,45,102,.16), 0 1px 2px rgba(31,45,102,.08), 0 6px 14px -8px rgba(31,45,102,.4); transition: transform .25s cubic-bezier(.34,1.56,.64,1), background-color .2s; }
+  .pg-toggle:hover { transform: scale(1.06); background: #fff; }
+  .pg-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .pg-toggle .play, .pg.paused .pg-toggle .pause { display: none; }
+  .pg.paused .pg-toggle .play { display: block; }
   .pg-slide { position: relative; flex: none; height: 100%; aspect-ratio: var(--ratio, 16 / 9); margin-right: 16px; border-radius: 16px; overflow: hidden; background: #fff;
     box-shadow: 0 1px 2px rgba(22,34,79,.1), 0 10px 22px -8px rgba(22,34,79,.3); }
   .pg-slide::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
@@ -182,7 +207,7 @@
 
   .paper-details { display: grid; grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: 40px clamp(48px, 7vw, 120px); margin-top: clamp(48px, 6vw, 80px); align-items: start; text-align: left; }
   .paper-meta { position: sticky; top: 24px; margin: 0; display: grid; gap: 22px; }
-  .paper-meta dt { font-size: 13px; color: #8a8fa3; }
+  .paper-meta dt { font-size: 13px; color: #6b7086; }
   .paper-meta dd { margin: 4px 0 0; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; }
   .paper-results { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
   .paper-results li { font-size: 15px; font-weight: 400; letter-spacing: 0; color: #4b5480; }
@@ -208,9 +233,6 @@
   .shelf::after { content: ""; flex: 0 0 1px; }
 
   .folder { position: relative; flex: none; width: 360px; height: 280px; scroll-snap-align: start; color: var(--ink); text-decoration: none; outline: none; }
-  .folder .tab-badge { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px 3px 7px; border-radius: 980px; font-size: 12px; font-weight: 600; letter-spacing: -0.005em; color: #fff; white-space: nowrap;
-    background: linear-gradient(160deg, #7d8ae0, #4a5bc4); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 2px 6px -2px rgba(31,45,102,.5); }
-  .folder .tab-badge svg { color: #ffd76a; filter: drop-shadow(0 0 3px rgba(255,215,106,.7)); }
   .folder .tab { position: absolute; left: 0; bottom: 100%; margin-bottom: -1px; width: 38%; height: 26px; background: var(--fold-back); border-radius: 12px 12px 0 0; }
   .folder .back { position: absolute; inset: 0; background: var(--fold-back); border-radius: 0 16px 16px 16px; }
   .folder .sheet { position: absolute; left: 14px; right: 14px; top: 14px; height: 190px; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 6px 16px rgba(0,0,0,.06); transition: transform .55s cubic-bezier(.34,1.45,.64,1); }
@@ -240,30 +262,30 @@
 
   .today { margin-top: 40px; font-size: clamp(24px, 2.8vw, 36px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.3; color: var(--mute); max-width: 30ch; }
   .today b { color: var(--ink); font-weight: 500; }
-  .about-body { margin-top: 40px; max-width: 64ch; }
-  .about-body .today { margin: 0 0 12px; max-width: none; }
-  .about-body { max-width: 760px; }
-  .about-body p:not(.today) { max-width: 64ch; }
-  .about-body .today b { white-space: nowrap; }
-  .about-body p:not(.today) { margin: 18px 0 0; font-size: clamp(17px, 1.5vw, 19px); line-height: 1.65; letter-spacing: -0.01em; color: #3d4256; }
-  .about-body a { color: var(--blue); font-weight: 500; text-decoration: underline; text-decoration-color: var(--peri); text-decoration-thickness: 1.5px; text-underline-offset: 4px; transition: text-decoration-color .2s; }
-  .about-body a:hover { text-decoration-color: var(--blue); }
+  /* about: one centred column, big friendly type, blue links */
+  .about-col { max-width: 990px; margin: 0 auto; }
+  .about-body { margin-top: 36px; }
+  .about-body p { margin: 0; font-size: clamp(21px, 2.15vw, 31px); line-height: 1.38; font-weight: 400; letter-spacing: -0.022em; color: var(--ink); }
+  .about-body p + p { margin-top: 1.05em; }
+  .about-body a { color: var(--blue); text-decoration: none; transition: color .2s; }
+  .about-body a:hover { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+  .about-body a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
 
   /* the magnet collage: photos + bits and pieces floating right on the page; drag them around */
   /* the magnets can sit anywhere in the hero: x/y are % of this area, sizes scale with it */
   .board { position: absolute; left: 40px; right: 40px; top: calc(72px + 2vh); bottom: calc(48px + 3vh); container-type: size; --u: min(.58cqw, 1.425cqh); pointer-events: none; }
   .board .item { pointer-events: auto; }
   .board.hold .item { visibility: hidden; }
-  .hello .hint { margin-top: 18px; text-align: left; }
+  .hello .hint { margin-top: 16px; text-align: left; }
   /* a hand-drawn highlighter swipe behind the hint */
   .hint mark { position: relative; isolation: isolate; background: none; color: #46508f; font-weight: 500; padding: .1em .35em; white-space: nowrap; }
   .hint mark::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: .15em; bottom: .05em; background: rgba(159,178,255,.45);
     border-radius: .55em .25em .6em .3em / .45em .6em .35em .55em; transform: rotate(-1.2deg) skewX(-10deg); transform-origin: left center; }
   .js .hint mark::before { animation: swipe .55s cubic-bezier(.3,.7,.3,1) 2.1s both; }
   @keyframes swipe { from { transform: rotate(-1.2deg) skewX(-10deg) scaleX(0); } to { transform: rotate(-1.2deg) skewX(-10deg) scaleX(1); } }
-  .item { position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: calc(var(--w) * calc(1 * var(--u))); transform: rotate(var(--r, 0deg)); transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s; touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 6px 14px rgba(20,30,80,.12); }
+  .item { position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: calc(var(--w) * calc(1 * var(--u))); transform: rotate(var(--r, 0deg)); transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s; touch-action: pan-y; -webkit-touch-callout: none; cursor: grab; user-select: none; -webkit-user-select: none; box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 6px 14px rgba(20,30,80,.12); }
   .item:hover { transform: rotate(var(--r, 0deg)) translateY(-2px) scale(1.03); box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 14px 28px rgba(20,30,80,.18); }
-  .item.dragging { cursor: grabbing; transition: box-shadow .2s; transform: rotate(var(--r, 0deg)) scale(1.06); box-shadow: 0 20px 40px rgba(20,30,80,.25); }
+  .item.dragging { cursor: grabbing; transition: transform .18s ease-out, box-shadow .2s; transform: rotate(var(--r, 0deg)) scale(1.06); box-shadow: 0 20px 40px rgba(20,30,80,.25); }
   .item img { pointer-events: none; }
   /* star confetti: a sprinkle behind everything, not draggable */
   .board .item.confetti { pointer-events: none; cursor: default; box-shadow: none; }
@@ -322,6 +344,12 @@
   .links a:hover { transform: translateY(-3px) scale(1.08); }
   .links a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .xoxo { font-size: 15px; font-weight: 500; }
+  .mail-row { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .mail { color: #fff; font-size: clamp(17px, 1.6vw, 21px); font-weight: 500; letter-spacing: -0.015em; text-decoration: underline; text-decoration-color: rgba(255,255,255,.5); text-decoration-thickness: 1.5px; text-underline-offset: 5px; overflow-wrap: anywhere; }
+  .mail:hover { text-decoration-color: #fff; }
+  .copy { font: inherit; font-size: 13px; font-weight: 600; color: var(--peri); background: #fff; border: 0; border-radius: 980px; padding: 7px 14px; min-height: 32px; cursor: pointer; transition: transform .2s; }
+  .copy:hover { transform: translateY(-1px); }
+  .copy:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .fine { margin-top: 72px; align-items: baseline; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.35); font-size: 13px; color: #fff; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
   /* sections ease in as you scroll to them */
@@ -330,13 +358,14 @@
 
   @media (max-width: 1100px) {
     .hero-in { height: auto; min-height: 100svh; flex-direction: column; align-items: flex-start; justify-content: center; gap: 20px; padding: 96px 40px 120px; }
-    .board { position: relative; inset: auto; width: min(100%, 480px); aspect-ratio: 5 / 6; align-self: center; margin: 16px 0 40px; --u: 1.3cqw; }
-    .item { left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); }
+    .board { position: relative; inset: auto; width: min(100%, 480px); aspect-ratio: 5 / 8; align-self: center; margin: 16px 0 40px; --u: 1.3cqw; }
+    .item { left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); width: calc(var(--mw, var(--w)) * var(--u)); }
+    .board .desk-only { display: none; }
   }
   @media (max-width: 760px) {
     :root { --edge: 20px; }
     .bar nav { gap: 24px; padding: 16px 20px 0; }
-    .hero-in { padding: 88px 20px 120px; }
+    .hero-in { padding: 88px 20px 84px; }
     .name { font-size: clamp(72px, 23vw, 120px); }
     .section { padding: 88px 20px; }
     .works { padding: 88px 0 72px; }
@@ -344,14 +373,13 @@
     .seg-row { padding: 0 20px; margin-top: 20px; }
     .seg button { padding: 9px 14px; font-size: 14px; }
     .panel { padding: 32px 20px 16px; }
-    .xp-row { flex-direction: column; height: auto; }
-    .xp, .xp.on { flex: none; background: #eef1fb; cursor: default; }
-    .xp-text, .xp.on .xp-text { max-width: 100%; height: auto; }
-    .xp-desc { opacity: 1; transform: none; }
-    .xp-foot { margin-top: 18px; }
-    .xp-go { background: #1f2d66; color: #fff; }
-    .xp-pic { position: relative; inset: auto; width: 100%; height: 160px; margin-top: 18px; opacity: 1; transform: none; }
-    .oc { height: 210px; }
+    .jobs { padding: 2px 18px; border-radius: 22px; }
+    .job { grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; }
+    .job-logo { width: 44px; height: 44px; border-radius: 10px; margin-top: 22px; }
+    .job-body { padding: 22px 0 24px; }
+    .job-title { font-size: 17px; }
+    .job-points li { font-size: 15px; }
+    .job-media { display: flex; }
     .paper-dlg { padding: 10px 8px; }
     .paper { min-height: 0; }
     .paper { border-radius: 22px; }
@@ -360,9 +388,6 @@
     .paper-meta { position: static; grid-template-columns: 1fr 1fr; }
     .paper-sec p, .paper-sec li { font-size: 16px; }
     .oc-row { grid-template-columns: 1fr; }
-    .oc-title { font-size: 22px; }
-    .oc .oc-art { left: -6px; }
-    .xp-pic:has(> .shot-empty) { display: none; }
     .arrows { display: none; }
     .shelf { gap: 18px; }
     .folder { width: min(78vw, 340px); height: 310px; }
@@ -373,10 +398,11 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .js .ch, .js .meta, .down, .js .item.confetti, .js .hint mark::before { animation: none !important; }
-    .folder .sheet, .folder .front, .item, .xp, .xp *, .oc-art, .oc-foot i { transition: none !important; }
+    .js .ch, .js .meta, .js .cta, .down, .js .item.confetti, .js .hint mark::before { animation: none !important; }
+    .folder .sheet, .folder .front, .item, .job-media, .btn { transition: none !important; }
     .paper figure.is-loop { overflow-x: auto; }
     .pg-run { animation: none; }
+    .pg-slide[aria-hidden="true"], .pg-toggle { display: none; }
     .swap { animation: none; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
   }
@@ -388,7 +414,7 @@
   <nav>
     <a href="#works">works</a>
     <a href="#about">about</a>
-    <a href="resume.pdf" target="_blank" rel="noopener">resume</a><!-- TODO: put your resume in this folder as resume.pdf -->
+    <a href="mailto:pavnilabade07@gmail.com?subject=Resume%20request" title="email me for my resume">resume</a>
   </nav>
 </header>
 
@@ -399,28 +425,31 @@
       <p class="roles" id="roles"><span class="lead">i am a</span> builder, creative, dreamer, doer.</p>
       <p class="meta">
         currently: <b>gtm + ops @ <a href="https://withe.co" target="_blank" rel="noopener">withe</a></b>, <b>cs + business at <a href="https://you.ubc.ca/programs/business-computer-science/" target="_blank" rel="noopener">ubc</a></b><br>
-        open to <b>winter &amp; summer ’27</b> internship opportunities
+        open to <b>winter &amp; summer ’27</b> <span class="nw">internship opportunities</span>
       </p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:pavnilabade07@gmail.com?subject=Resume%20request">email me for my resume</a>
+        <a class="btn" href="https://www.linkedin.com/in/pavnilabade" target="_blank" rel="noopener">linkedin <span aria-hidden="true">↗</span></a>
+      </div>
       <p class="hint"><mark>drag the magnets around!</mark></p>
     </div>
-    <div class="board" data-intro="place" role="group" aria-label="A collage of keepsakes held up by magnets: pressed blue flowers, a little camera with Pavni's photo on it, a polaroid of a sunny walk, two lake polaroids on a clip, a mix tape, a little figure on a laptop, a P keycap, a paper crane, a record, an 8-ball, a New York postcard and a Great Wave stamp. You can drag them around.">
+    <div class="board" data-intro="place" role="group" aria-label="A collage of keepsakes held up by magnets. You can drag them around.">
       <!-- to add a piece: <div class="item cut" style="--x:50;--y:50;--w:14;--r:-4deg;--mx:40;--my:40"><img src="assets/magnets/name.webp" width="…" height="…" alt="" draggable="false"></div>
            --x/--y = where it sits on laptops (% of the hero area), --mx/--my = where it sits on phones + tablets,
            --w = how big, --r = tilt; add "mag" to the class for a star magnet on top ("mag ceramic" for the blue star) -->
-      <div class="item confetti" style="--x:40;--y:0;--w:50;--r:0deg;--mx:0;--my:0" aria-hidden="true"><img src="assets/magnets/confetti.webp" width="551" height="775" alt="" draggable="false"></div>
-      <div class="item confetti" style="--x:66;--y:4;--w:50;--r:180deg;--mx:35;--my:22" aria-hidden="true"><img src="assets/magnets/confetti.webp" width="551" height="775" alt="" draggable="false"></div>
-      <div class="item cut pressed" style="--x:58.2;--y:21.4;--w:22;--r:-12deg;--mx:57;--my:45"><img src="assets/magnets/flowers.webp" width="520" height="578" alt="" draggable="false"></div>
-      <div class="item cut mag" style="--x:74.1;--y:70.9;--w:25;--r:10deg;--mx:55;--my:62"><img src="assets/magnets/record.webp" width="520" height="520" alt="" draggable="false"></div>
-      <div class="item cut" style="--x:78.6;--y:-2.8;--w:15;--r:3deg;--mx:76;--my:0"><img src="assets/magnets/clip-lake.webp" width="440" height="1189" alt="Two polaroids held by a silver clip: a sunset over a lake, and Pavni looking out over the water" draggable="false"></div>
-      <div class="item cut" style="--x:30.6;--y:-0.9;--w:44;--r:-4deg;--mx:2;--my:1"><img src="assets/magnets/camera.webp" width="960" height="715" alt="Pavni on the screen of a little silver camera" draggable="false"></div>
-      <div class="item cut flat" style="--x:89.5;--y:59.5;--w:24;--r:6deg;--mx:60;--my:85"><img src="assets/magnets/polaroid-walk.webp" width="760" height="590" alt="A polaroid with little bows and stars: Pavni and a friend walking down a sunny tree-lined street" draggable="false"></div>
-      <div class="item cut flat mag ceramic" style="--x:49.0;--y:64.6;--w:36;--r:-3deg;--mx:5;--my:63"><img src="assets/magnets/postcard-nyc.webp" width="720" height="463" alt="" draggable="false"></div>
-      <div class="item cut" style="--x:62.5;--y:52.5;--w:21;--r:7deg;--mx:41;--my:41"><img src="assets/magnets/mixtape.webp" width="560" height="359" alt="" draggable="false"></div>
-      <div class="item cut flat" style="--x:39.4;--y:52.9;--w:14;--r:7deg;--mx:20;--my:43"><img src="assets/magnets/stamp-wave.webp" width="520" height="422" alt="" draggable="false"></div>
-      <div class="item cut" style="--x:75.4;--y:0.1;--w:10;--r:0deg;--mx:61;--my:3"><img src="assets/magnets/eight-ball.webp" width="320" height="320" alt="" draggable="false"></div>
-      <div class="item cut" style="--x:84.4;--y:49.8;--w:10;--r:-8deg;--mx:72;--my:47"><img src="assets/magnets/key-p.webp" width="360" height="342" alt="" draggable="false"></div>
-      <div class="item cut" style="--x:44.6;--y:88.1;--w:14;--r:-8deg;--mx:36;--my:84"><img src="assets/magnets/crane.webp" width="420" height="346" alt="" draggable="false"></div>
-      <div class="item cut" style="--x:55.4;--y:1.4;--w:12;--r:0deg;--mx:2;--my:40"><img src="assets/magnets/figure.webp" width="420" height="726" alt="A little figure with glasses typing on a laptop, a cat on its head" draggable="false"></div>
+      <div class="item confetti" style="--x:58.5;--y:-9.9;--w:54;--r:0deg;--mx:16.4;--my:11.9;--mw:60" aria-hidden="true"><img src="assets/magnets/confetti.webp" width="551" height="775" alt="" draggable="false"></div>
+      <div class="item cut pressed" style="--x:63.1;--y:10.2;--w:22;--r:-12deg;--mx:34;--my:30;--mw:25"><img src="assets/magnets/flowers.webp" width="520" height="578" alt="Pressed blue flowers" draggable="false"></div>
+      <div class="item cut mag" style="--x:74.6;--y:74.6;--w:25;--r:10deg;--mx:34;--my:73;--mw:32"><img src="assets/magnets/record.webp" width="520" height="520" alt="A record" draggable="false"></div>
+      <div class="item cut" style="--x:87.8;--y:-9.9;--w:15;--r:3deg;--mx:76;--my:2;--mw:15"><img src="assets/magnets/clip-lake.webp" width="440" height="1189" alt="Two polaroids held by a silver clip: a sunset over a lake, and Pavni looking out over the water" draggable="false"></div>
+      <div class="item cut" style="--x:38.5;--y:-2.7;--w:44;--r:-4deg;--mx:2;--my:2;--mw:50"><img src="assets/magnets/camera.webp" width="960" height="715" alt="Pavni on the screen of a little silver camera" draggable="false"></div>
+      <div class="item cut flat" style="--x:89.7;--y:60.2;--w:24;--r:6deg;--mx:58;--my:55;--mw:32"><img src="assets/magnets/polaroid-walk.webp" width="760" height="590" alt="A polaroid with little bows and stars: Pavni and a friend walking down a sunny tree-lined street" draggable="false"></div>
+      <div class="item cut flat mag ceramic" style="--x:51.7;--y:57.9;--w:36;--r:-3deg;--mx:3;--my:50;--mw:48"><img src="assets/magnets/postcard-nyc.webp" width="720" height="463" alt="A New York postcard" draggable="false"></div>
+      <div class="item cut" style="--x:66.6;--y:42.6;--w:21;--r:7deg;--mx:56;--my:37;--mw:30"><img src="assets/magnets/mixtape.webp" width="560" height="359" alt="A mix tape" draggable="false"></div>
+      <div class="item cut flat" style="--x:42.0;--y:49.7;--w:14;--r:7deg;--mx:5;--my:37;--mw:18"><img src="assets/magnets/stamp-wave.webp" width="520" height="422" alt="A Great Wave stamp" draggable="false"></div>
+      <div class="item cut" style="--x:84.6;--y:-5.2;--w:10;--r:0deg;--mx:67;--my:0;--mw:11"><img src="assets/magnets/eight-ball.webp" width="320" height="320" alt="An 8-ball" draggable="false"></div>
+      <div class="item cut desk-only" style="--x:91.9;--y:42.4;--w:10;--r:-8deg"><img src="assets/magnets/key-p.webp" width="360" height="342" alt="A P keycap" draggable="false"></div>
+      <div class="item cut" style="--x:43.6;--y:83.2;--w:14;--r:-8deg;--mx:8;--my:78;--mw:18"><img src="assets/magnets/crane.webp" width="420" height="346" alt="A paper crane" draggable="false"></div>
+      <div class="item cut desk-only" style="--x:76.7;--y:10.4;--w:12;--r:0deg"><img src="assets/magnets/figure.webp" width="420" height="726" alt="A little figure with glasses typing on a laptop, a cat on its head" draggable="false"></div>
     </div>
   </div>
   <a class="down" href="#works" aria-label="Scroll to works">
@@ -442,7 +471,7 @@
     <div class="seg" role="tablist" aria-label="Kinds of work" data-active="projects">
       <button role="tab" id="tab-projects" aria-selected="true" aria-controls="panel-projects" data-seg="projects">projects</button>
       <button role="tab" id="tab-experience" aria-selected="false" aria-controls="panel-experience" data-seg="experience" tabindex="-1">experience</button>
-      <button role="tab" id="tab-other" aria-selected="false" aria-controls="panel-other" data-seg="other" tabindex="-1">other</button>
+      <button role="tab" id="tab-leadership" aria-selected="false" aria-controls="panel-leadership" data-seg="leadership" tabindex="-1">leadership</button>
     </div>
     <div class="arrows">
       <button class="prev" aria-label="Previous project"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2L4 7l5 5"/></svg></button>
@@ -451,7 +480,7 @@
   </div>
   <div class="shelf" id="panel-projects" role="tabpanel" aria-labelledby="tab-projects">
     <a class="folder sky reveal" href="#work-chess" data-case="chess">
-      <span class="tab"><span class="tab-badge"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 2.2l3 6.1 6.7 1-4.9 4.7 1.2 6.7L12 17.5l-6 3.2 1.2-6.7L2.3 9.3l6.7-1z"/></svg>Featured</span></span><span class="back"></span>
+      <span class="tab"></span><span class="back"></span>
       <span class="sheet"><img src="assets/works/brainychamps-home.webp" width="1440" height="810" alt=""></span>
       <span class="front">
         <span class="row"><span class="title">Chess Learning Platform</span><span class="yr">2026</span></span>
@@ -461,7 +490,7 @@
     </a>
     <a class="folder cornflower reveal" href="#work-mochi" data-case="mochi">
       <span class="tab"></span><span class="back"></span>
-      <span class="sheet"><span class="shot-empty" aria-hidden="true"><i></i><i></i><i></i></span></span>
+      <span class="sheet"><img src="assets/works/mochi-thumb.webp" width="1400" height="800" alt=""></span>
       <span class="front">
         <span class="row"><span class="title">Mochi</span><span class="yr">2026</span></span>
         <span class="sum">A pixel productivity bunny who lives on my taskbar and gets upset when I am off task.</span>
@@ -470,7 +499,7 @@
     </a>
     <a class="folder royal reveal" href="#work-filo" data-case="filo">
       <span class="tab"></span><span class="back"></span>
-      <span class="sheet"><img src="assets/works/filo-signals.webp" width="1400" height="800" alt=""></span>
+      <span class="sheet"><img src="assets/works/filo-dashboard.webp" width="1400" height="800" alt=""></span>
       <span class="front">
         <span class="row"><span class="title">Filo</span><span class="yr">2026</span></span>
         <span class="sum">An AI agent that finds people on X who are ready to buy, and drafts the reply for you.</span>
@@ -482,73 +511,89 @@
       <span class="sheet"><img src="assets/works/this-site.webp" width="1200" height="675" alt=""></span>
       <span class="front">
         <span class="row"><span class="title">This Site!</span><span class="yr">2026</span></span>
-        <span class="sum">A scrapbook you can rearrange.</span>
+        <span class="sum">My personal website.</span>
         <span class="go">You’re here ✦</span>
       </span>
     </a>
   </div>
   <div class="panel" id="panel-experience" role="tabpanel" aria-labelledby="tab-experience" hidden>
-    <!-- TODO: swap each .shot-empty for a photo or screenshot, e.g. <img src="assets/works/withe.png" alt=""> -->
-    <div class="xp-row">
-      <article class="xp on">
-        <div class="xp-text">
-          <p class="xp-when">Now</p>
-          <h3 class="xp-title">GTM + Ops<br>@ Withe</h3>
-          <p class="xp-desc">Go-to-market, operations and the help center.</p>
-          <p class="xp-foot">Read more <a class="xp-go" href="https://withe.co" target="_blank" rel="noopener" aria-label="withe.co"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a></p>
+    <!-- straight from my resume. to add a role, copy one <article class="job"> block.
+         data-from / data-to on .job-dur are the first and last month (leave data-to off while it's still going) -->
+    <div class="jobs">
+      <article class="job">
+        <img class="job-logo" src="assets/works/withe-logo.svg" width="52" height="52" alt="">
+        <div class="job-body">
+          <h3 class="job-title">GTM &amp; Operations Intern</h3>
+          <p class="job-org"><a href="https://withe.co" target="_blank" rel="noopener">Withe</a> · OS for career fairs</p>
+          <p class="job-when">Aug 2026 – Present<span class="job-dur" data-from="2026-08"></span></p>
+          <ul class="job-points">
+            <li><b>Co-built Withe’s in-app help center: 25 articles, 13 demos,</b> and the code behind it.</li>
+            <li>Debug and ship <b>fixes and new features</b> to the live product.</li>
+            <li>Growing distribution for <b>Talent Sync</b>, Withe’s second product.</li>
+          </ul>
         </div>
-        <div class="xp-pic"><span class="shot-empty" aria-hidden="true"><i></i><i></i><i></i></span></div>
       </article>
-      <article class="xp">
-        <div class="xp-text">
-          <p class="xp-when"></p><!-- TODO: add dates, e.g. 2025 -->
-          <h3 class="xp-title">Growth<br>@ Althra</h3>
-          <p class="xp-desc">Growth work at Althra.</p>
-          <p class="xp-foot">Read more <a class="xp-go" href="#" aria-label="more about growth at althra"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a></p>
+      <article class="job">
+        <img class="job-logo" src="assets/works/althra-logo.png" width="52" height="52" alt="">
+        <div class="job-body">
+          <h3 class="job-title">Growth &amp; Marketing Intern</h3>
+          <p class="job-org"><a href="https://althra.ca" target="_blank" rel="noopener">Althra</a> · Vancouver’s startup incubator</p>
+          <p class="job-when">Jun 2026 – Aug 2026<span class="job-dur" data-from="2026-06" data-to="2026-08"></span></p>
+          <ul class="job-points">
+            <li>Ran Althra’s social media, including a <b>zero-cost UGC campaign</b> that drove <b>60K+ impressions</b> and <b>300+ new followers.</b></li>
+          </ul>
         </div>
-        <div class="xp-pic"><span class="shot-empty" aria-hidden="true"><i></i><i></i><i></i></span></div>
       </article>
-      <article class="xp">
-        <div class="xp-text">
-          <p class="xp-when">On the side</p>
-          <h3 class="xp-title">Chess Business</h3>
-          <p class="xp-desc">Running my own chess coaching business, and building the platform my students learn on.</p>
-          <p class="xp-foot">Read more <a class="xp-go" href="#" aria-label="more about the chess business"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a></p>
+      <article class="job">
+        <img class="job-logo" src="assets/works/chess-icon.png" width="52" height="52" alt="">
+        <div class="job-body">
+          <h3 class="job-title">Chess Tutoring Business &amp; App</h3>
+          <p class="job-org">Self-employed</p>
+          <p class="job-when">Jan 2026 – Sep 2026<span class="job-dur" data-from="2026-01" data-to="2026-09"></span></p>
+          <ul class="job-points">
+            <li>Designed and built a <b>Duolingo-style chess app</b> and <b>student-teacher platform</b> to run lessons.</li>
+            <li>Taught <b>20+ students</b> and grew to <b>$10K ARR.</b></li>
+          </ul>
+          <a class="job-media" href="#work-chess" data-case="chess">
+            <span class="job-thumb sheet"><img src="assets/works/brainychamps-home.webp" width="1440" height="810" alt=""></span>
+            <span class="job-media-text">Chess Learning Platform<span>Open ↗</span></span>
+          </a>
         </div>
-        <div class="xp-pic"><span class="shot-empty" aria-hidden="true"><i></i><i></i><i></i></span></div>
       </article>
     </div>
   </div>
-  <div class="panel" id="panel-other" role="tabpanel" aria-labelledby="tab-other" hidden>
-    <!-- TODO: point each card at a real link (org site, article, LinkedIn post) -->
+  <div class="panel" id="panel-leadership" role="tabpanel" aria-labelledby="tab-leadership" hidden>
+    <!-- to make a card a link, change <article class="oc"> … </article> to <a class="oc" href="https://…" target="_blank" rel="noopener"> … </a> -->
     <div class="oc-row">
-      <a class="oc" href="#">
-        <span class="oc-art" style="--aw:40%;--al:-20px;--ab:-18px;--ar:-10deg"><img src="assets/magnets/crane.webp" width="420" height="346" alt="" draggable="false"></span>
-        <span class="oc-title"><small>Founder &amp; Chair</small>Burnaby South Youth Council</span>
-        <span class="oc-foot">Read more <i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></i></span>
-      </a>
-      <a class="oc" href="#">
-        <span class="oc-art" style="--aw:36%;--al:-16px;--ab:-24px;--ar:-14deg"><img src="assets/magnets/flowers.webp" width="520" height="578" alt="" draggable="false"></span>
-        <span class="oc-title"><small>Executive Director</small>EMGirls Vancouver</span>
-        <span class="oc-foot">Read more <i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></i></span>
-      </a>
-      <a class="oc" href="#">
-        <span class="oc-art" style="--aw:32%;--al:-18px;--ab:-18px;--ar:-12deg"><img src="assets/magnets/star-ceramic.webp" width="240" height="229" alt="" draggable="false"></span>
-        <span class="oc-title"><small>Scholar</small>Cansbridge Scholars</span>
-        <span class="oc-foot">Read more <i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></i></span>
-      </a>
+      <article class="oc">
+        <span class="oc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.8-4.8 5.5-4.8s4.9 1.8 5.5 4.8"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.3c2.3.2 3.9 1.8 4.5 4.2"/></svg></span>
+        <p class="oc-role">Founder &amp; Chair</p>
+        <h3 class="oc-name">Burnaby South Youth Council</h3>
+      </article>
+      <article class="oc">
+        <span class="oc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></svg></span>
+        <p class="oc-role">Executive Director</p>
+        <h3 class="oc-name">EMGirls Vancouver</h3>
+      </article>
+      <article class="oc">
+        <span class="oc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.6 13.4 7.5 21l4.5-2.6 4.5 2.6-1.1-7.6"/></svg></span>
+        <p class="oc-role">Scholar</p>
+        <h3 class="oc-name">Cansbridge Scholars</h3>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="section" id="about">
-  <h2 class="heading reveal">about</h2>
-  <div class="about-body reveal">
-    <p class="today">Hi, I’m Pavni, a second-year <b>Business + Computer Science</b> student at <b>UBC</b>.</p>
-    <p>Growing up, I never related to the idea of “work-life balance,” where work drains you and life is what recharges you. I’ve always wanted a career that’s the reason I get up in the morning, excited to build.</p>
-    <p>Right now, I’m figuring out what that is, whether it’s in tech, building startups and communities, or exploring new fields altogether. The best way I’ve found is to put myself in rooms full of ambitious, driven people.</p>
-    <p>In the future, I want to build products that aren’t just functional, but create experiences people genuinely enjoy and look forward to using.</p>
-    <p>Thanks for visiting my site. If any of this resonates, <a href="#contact">let’s connect!</a></p>
+<section class="section about" id="about">
+  <div class="about-col">
+    <h2 class="heading sm reveal">about</h2>
+    <div class="about-body reveal">
+      <p>Hi, I’m Pavni, a second-year <a href="https://you.ubc.ca/programs/business-computer-science/" target="_blank" rel="noopener">Business + Computer Science</a> student at <a href="https://www.ubc.ca" target="_blank" rel="noopener">UBC</a>.</p>
+      <p>Growing up, I never related to the idea of “work-life balance,” where work drains you and life is what recharges you. I’ve always wanted a career that’s the reason I get up in the morning, excited to build.</p>
+      <p>Right now, I’m figuring out what that is, whether it’s in tech, building startups and communities, or exploring new fields altogether. The best way I’ve found is to put myself in rooms full of ambitious, driven people.</p>
+      <p>In the future, I want to build products that aren’t just functional, but create experiences people genuinely enjoy and look forward to using.</p>
+      <p>Thanks for visiting my site. If any of this resonates, <a href="#contact">let’s connect!</a></p>
+    </div>
   </div>
 </section>
 
@@ -563,7 +608,12 @@
         <a href="https://x.com/pavni_ll" target="_blank" rel="noopener" aria-label="x (twitter)"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
       </div>
     </div>
-    <div class="fine"><span>© 2026</span><span class="xoxo">xoxo pavni</span></div>
+    <div class="mail-row">
+      <a class="mail" href="mailto:pavnilabade07@gmail.com">pavnilabade07@gmail.com</a>
+      <button class="copy" type="button" data-copy="pavnilabade07@gmail.com">copy</button>
+      <span class="sr" aria-live="polite"></span>
+    </div>
+    <div class="fine"><span>© 2026 Pavni Labade</span><span class="xoxo">xoxo pavni</span></div>
   </div>
 </footer>
 
@@ -641,8 +691,13 @@
     prev.parentElement.classList.toggle("idle", shelf.scrollWidth - shelf.clientWidth < 24);
   };
   shelf.addEventListener("scroll", ends, { passive: true });
+  // tabbing to a folder that sits past the edge slides the shelf over to it
+  shelf.addEventListener("focusin", e => {
+    const f = e.target.closest(".folder");
+    if (f && f.matches(":focus-visible")) f.scrollIntoView({ inline: "nearest", block: "nearest", behavior: still ? "auto" : "smooth" });
+  });
 
-  // projects / experience / other: each has its own panel and its own colour on the switch
+  // projects / experience / leadership: each has its own panel and its own colour on the switch
   const seg = document.querySelector(".seg");
   const tabs = [...seg.querySelectorAll("[role=tab]")];
   const pick = tab => {
@@ -653,7 +708,7 @@
       const panel = document.getElementById(t.getAttribute("aria-controls"));
       panel.hidden = !on;
       if (on && !still) {
-        panel.querySelectorAll(".folder, .xp, .oc").forEach((el, k) => {
+        panel.querySelectorAll(".folder, .job, .oc").forEach((el, k) => {
           el.classList.remove("swap");
           void el.offsetWidth;
           el.style.animationDelay = `${k * 80}ms`;
@@ -678,10 +733,14 @@
     });
   });
 
-  // experience: the card you point at, tap or tab into opens up
-  const xps = [...document.querySelectorAll(".xp")];
-  const openXp = c => xps.forEach(x => x.classList.toggle("on", x === c));
-  xps.forEach(c => ["mouseenter", "click", "focusin"].forEach(ev => c.addEventListener(ev, () => openXp(c))));
+  // experience: how long each role ran, LinkedIn style ("· 3 mos"), counting the first and last month
+  const today = new Date();
+  document.querySelectorAll(".job-dur").forEach(el => {
+    const [fy, fm] = el.dataset.from.split("-").map(Number);
+    const [ty, tm] = el.dataset.to ? el.dataset.to.split("-").map(Number) : [today.getFullYear(), today.getMonth() + 1];
+    const n = (ty - fy) * 12 + tm - fm + 1, y = Math.floor(n / 12), m = n % 12;
+    el.textContent = " · " + [y && `${y} yr${y > 1 ? "s" : ""}`, m && `${m} mo${m > 1 ? "s" : ""}`].filter(Boolean).join(" ");
+  });
   addEventListener("resize", ends);
   ends();
   if (matchMedia("(hover: none)").matches && "IntersectionObserver" in window) {
@@ -691,42 +750,73 @@
     folders.forEach(f => opener.observe(f));
   }
 
-  // collage: drag the pieces around; whatever you grab comes to the front
+  // collage: drag the pieces around; whatever you grab comes to the front.
+  // a mouse picks a piece up straight away; a finger picks it up after a short hold or a sideways drag,
+  // so a quick swipe up or down over the collage still scrolls the page
   const board = document.querySelector(".board");
   const hero = document.querySelector(".hero");
   const stacked = matchMedia("(max-width: 1100px)");
+  const sideways = (dx, dy) => Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy);
   let stack = 10;
   board.querySelectorAll(".item:not(.confetti)").forEach(item => {
+    let held = false, t0 = null;
+    // once a piece is in your fingers, the page stays put while you move it
+    item.addEventListener("touchstart", e => { t0 = [e.touches[0].clientX, e.touches[0].clientY]; }, { passive: true });
+    item.addEventListener("touchmove", e => {
+      const t = e.touches[0];
+      if (held || (t0 && sideways(t.clientX - t0[0], t.clientY - t0[1]))) e.preventDefault();
+    }, { passive: false });
+    item.addEventListener("contextmenu", e => { if (held) e.preventDefault(); });
     item.addEventListener("pointerdown", e => {
       if (e.button !== 0) return;
       e.preventDefault();
-      item.getAnimations({ subtree: true }).forEach(a => a.finish());
       const startX = e.clientX, startY = e.clientY;
-      const left0 = item.offsetLeft, top0 = item.offsetTop;
-      const hb = hero.getBoundingClientRect(), bb = board.getBoundingClientRect();
-      const vw = document.documentElement.clientWidth, vh = innerHeight;
-      // how far the tilted corners stick out past the piece's box, so they stay on screen too
-      const ir = item.getBoundingClientRect(), bx = bb.left + left0, by = bb.top + top0;
-      const padL = Math.max(0, bx - ir.left), padR = Math.max(0, ir.right - bx - item.offsetWidth);
-      const padT = Math.max(0, by - ir.top), padB = Math.max(0, ir.bottom - by - item.offsetHeight);
-      const minX = Math.max(hb.left, 0) - bb.left + padL, maxX = Math.min(hb.right, vw) - bb.left - item.offsetWidth - padR;
-      const minY = Math.max(hb.top, 0) - bb.top + padT, maxY = Math.min(hb.bottom, vh) - bb.top - item.offsetHeight - padB;
-      item.setPointerCapture(e.pointerId);
-      item.classList.add("dragging");
-      item.style.zIndex = ++stack;
+      let lastX = startX, lastY = startY, left0, top0, minX, maxX, minY, maxY, timer;
+      const pickUp = () => {
+        held = true;
+        item.getAnimations({ subtree: true }).forEach(a => a.finish());
+        left0 = item.offsetLeft;
+        top0 = item.offsetTop;
+        const hb = hero.getBoundingClientRect(), bb = board.getBoundingClientRect();
+        const vw = document.documentElement.clientWidth, vh = innerHeight;
+        // how far the tilted corners stick out past the piece's box, so they stay on screen too
+        const ir = item.getBoundingClientRect(), bx = bb.left + left0, by = bb.top + top0;
+        const padL = Math.max(0, bx - ir.left), padR = Math.max(0, ir.right - bx - item.offsetWidth);
+        const padT = Math.max(0, by - ir.top), padB = Math.max(0, ir.bottom - by - item.offsetHeight);
+        minX = Math.max(hb.left, 0) - bb.left + padL;
+        maxX = Math.min(hb.right, vw) - bb.left - item.offsetWidth - padR;
+        minY = Math.max(hb.top, 0) - bb.top + padT;
+        maxY = Math.min(hb.bottom, vh) - bb.top - item.offsetHeight - padB;
+        item.classList.add("dragging");
+        item.style.zIndex = ++stack;
+      };
       const move = ev => {
+        lastX = ev.clientX;
+        lastY = ev.clientY;
+        if (!held) {
+          // not holding it yet: up or down is the page scrolling, sideways picks it up
+          if (!sideways(lastX - startX, lastY - startY)) return;
+          clearTimeout(timer);
+          pickUp();
+        }
+        item.classList.add("moved");
         const w = board.clientWidth, h = board.clientHeight;
-        const x = Math.min(Math.max(left0 + ev.clientX - startX, minX), maxX);
-        const y = Math.min(Math.max(top0 + ev.clientY - startY, minY), maxY);
+        const x = Math.min(Math.max(left0 + lastX - startX, minX), maxX);
+        const y = Math.min(Math.max(top0 + lastY - startY, minY), maxY);
         item.style.setProperty(stacked.matches ? "--mx" : "--x", x / w * 100);
         item.style.setProperty(stacked.matches ? "--my" : "--y", y / h * 100);
       };
       const drop = () => {
+        clearTimeout(timer);
+        held = false;
         item.classList.remove("dragging");
         item.removeEventListener("pointermove", move);
         item.removeEventListener("pointerup", drop);
         item.removeEventListener("pointercancel", drop);
       };
+      item.setPointerCapture(e.pointerId);
+      if (e.pointerType === "mouse") pickUp();
+      else timer = setTimeout(() => { if (Math.hypot(lastX - startX, lastY - startY) < 10) pickUp(); }, 250);
       item.addEventListener("pointermove", move);
       item.addEventListener("pointerup", drop);
       item.addEventListener("pointercancel", drop);
@@ -804,14 +894,50 @@
     },
   };
 
-  if (!still && intros[introName]) {
-    board.classList.add("hold");
-    const loaded = Promise.all(items.map(el => { const img = el.querySelector("img"); return img && img.decode ? img.decode().catch(() => {}) : null; }));
-    Promise.race([loaded, new Promise(done => setTimeout(done, 1500))]).then(() => {
-      intros[introName](items.map(el => el.getBoundingClientRect()));
-      board.classList.remove("hold");
+  // first layout: if a magnet would cover the words on this screen size, slide it right just enough.
+  // (pieces someone has dragged are left where they put them)
+  const hello = document.querySelector(".hello");
+  items.forEach(el => { el.dataset.x0 = el.style.getPropertyValue("--x"); });
+  function textBoxes() {
+    // measure where the words END UP, even while they're still hopping in
+    const anims = hello.getAnimations({ subtree: true });
+    const saved = anims.map(a => a.currentTime);
+    anims.forEach(a => { try { a.currentTime = a.effect.getComputedTiming().endTime; } catch (err) {} });
+    const out = [];
+    hello.querySelectorAll(".hi, #name, #roles, .meta, .cta .btn, .hint mark").forEach(el => {
+      if (el.matches(".btn, mark")) { out.push(el.getBoundingClientRect()); return; }
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      for (const b of range.getClientRects()) if (b.width > 2 && b.height > 2) out.push(b);
     });
+    anims.forEach((a, k) => { try { a.currentTime = saved[k]; } catch (err) {} });
+    return out;
   }
+  function clearText() {
+    if (stacked.matches) return;
+    const words = textBoxes(), bb = board.getBoundingClientRect(), pad = 16;
+    for (const el of items) {
+      if (el.classList.contains("moved")) continue;
+      el.style.setProperty("--x", el.dataset.x0);
+      const r = el.getBoundingClientRect();
+      const lift = el.classList.contains("mag") ? parseFloat(getComputedStyle(el, "::before").height) / 2 || 0 : 0;
+      let push = 0;
+      for (const b of words)
+        if (r.left < b.right + pad && r.right > b.left - pad && r.top - lift < b.bottom + pad && r.bottom > b.top - pad)
+          push = Math.max(push, b.right + pad - r.left);
+      if (push) el.style.setProperty("--x", (parseFloat(el.dataset.x0) + push / bb.width * 100).toFixed(2));
+    }
+  }
+  board.classList.add("hold");
+  const loaded = Promise.all(items.map(el => { const img = el.querySelector("img"); return img && img.decode ? img.decode().catch(() => {}) : null; }));
+  const fontsReady = document.fonts ? document.fonts.ready : null;
+  Promise.race([Promise.all([loaded, fontsReady]), new Promise(done => setTimeout(done, 1500))]).then(() => {
+    clearText();
+    if (!still && intros[introName]) intros[introName](items.map(el => el.getBoundingClientRect()));
+    board.classList.remove("hold");
+  });
+  let settle;
+  addEventListener("resize", () => { clearTimeout(settle); settle = setTimeout(clearText, 120); });
 
   // ---------------------------------------------------------------- project papers
   // Click a folder: its sheet flies out and opens as a project page. Edit the words here;
@@ -827,7 +953,7 @@
       icon: "pawn", iconImg: "chess-icon.png",
       title: "Chess Learning Platform",
       tag: "An app where kids learn chess by playing it: homework, puzzles, live games and a leaderboard to climb.",
-      meta: [["Type", "Web app"], ["Role", "Founder & Full-Stack Developer"], ["Year", "2025 – Present"]],
+      meta: [["Type", "Web app"], ["Role", "Founder & Full-Stack Developer"], ["Year", "2026"]],
       results: [["$10K", "revenue in under 5 months"], ["25", "paying users"]],
       imgs: [
         ["brainychamps-home.webp", "A student's home screen with their rating, streak, gems and daily quests"],
@@ -888,7 +1014,7 @@
       title: "Mochi",
       tag: "A pixel productivity bunny who lives on my taskbar and gets upset when I am off task.",
       meta: [["Type", "Windows desktop app"], ["Role", "Designer & Developer"], ["Year", "2026"]],
-      imgs: [],
+      imgs: [["mochi-moods.webp", "Mochi in five moods: cheering me on, proud, sad, angry, and celebrating with a crown"]],
       story: [
         ["What I Made", ["Website blockers are easy to switch off, so I wanted one built around my own study and work habits, with no loopholes for me to find. I drew Mochi, gave her a spot on my taskbar, and built a desktop app around her."]],
         ["What It Does", ["Mochi watches which app or site I’m on. When I’m working, she’s happy and cheers me on. When I drift off task, she gets sad, then angry, and after 5 minutes a full-screen blocker steps in. Before a session I tell her which task I’m doing, and if I try to end early, she makes me get past her first two excuses. Staying focused earns carrots I can spend on little outfits for her."]],
@@ -904,18 +1030,11 @@
     "this-site": {
       icon: "sparkle",
       title: "This Site!",
-      tag: "A one-page portfolio that gives you the facts in five seconds, with a scrapbook of real keepsakes you can drag anywhere on the screen.",
+      tag: "My personal website.",
       meta: [["Type", "Website"], ["Role", "Designer & Developer"], ["Year", "2026"]],
       imgs: [["this-site.webp", "The pavni.build homepage: the name pavni on the left and a collage of keepsakes on the right"]],
-      why: "I wanted a portfolio that gives you the facts in five seconds and still feels like me: clean type, with a scrapbook of things I actually keep on top.",
-      features: [
-        ["Draggable Magnets", "Every keepsake can be dragged anywhere on the screen, but never off it."],
-        ["Handmade Intro", "Pieces are laid down one at a time with a little wobble, and it’s skipped for anyone who prefers reduced motion."],
-        ["Responsive Layout", "Positions are stored as percentages of the hero, so the collage keeps its shape on any screen."],
-        ["Project Papers", "Each project folder opens into a page like this one."],
-      ],
       stack: [["Languages", "HTML, CSS, JavaScript"], ["APIs", "Web Animations API, Pointer Events"], ["Frameworks", "None, on purpose"]],
-      links: [["Code", "https://github.com/wilddflower"]],
+      links: [["Code", "https://github.com/wilddflower/pavni.build"]],
     },
   };
 
@@ -924,6 +1043,10 @@
   const paperBody = paperDlg.querySelector(".paper-body");
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const isTodo = s => /\[.*\]/.test(String(s));
+  const pauseBtn = `<button class="pg-toggle" type="button" aria-label="Pause the screenshots">
+    <svg class="pause" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx="1" fill="currentColor"/><rect x="7.4" y="1.5" width="2.6" height="9" rx="1" fill="currentColor"/></svg>
+    <svg class="play" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.4 1.9v8.2c0 .6.7 1 1.2.6l6.3-4.1c.5-.3.5-1 0-1.3L4.6 1.3c-.5-.4-1.2 0-1.2.6z" fill="currentColor"/></svg>
+  </button>`;
   const t = s => isTodo(s) ? ' class="todo"' : "";
   let fromSheet = null, closing = false;
 
@@ -933,8 +1056,8 @@
     const media = !c.imgs.length
       ? '<figure class="empty"><span class="shot-empty" aria-hidden="true"><i></i><i></i><i></i></span></figure>'
       : loop
-        ? `<figure class="is-loop"><div class="pg-run" style="--n:${c.imgs.length}${c.ratio ? `;--ratio:${esc(c.ratio)}` : ""}">${[0, 1].map(copy => c.imgs.map(([f, alt]) =>
-            `<div class="pg-slide"${copy ? ' aria-hidden="true"' : ""}><img src="assets/works/${esc(f)}" alt="${copy ? "" : esc(alt)}"></div>`).join("")).join("")}</div></figure>`
+        ? `<div class="pg"><figure class="is-loop"><div class="pg-run" style="--n:${c.imgs.length}${c.ratio ? `;--ratio:${esc(c.ratio)}` : ""}">${[0, 1].map(copy => c.imgs.map(([f, alt]) =>
+            `<div class="pg-slide"${copy ? ' aria-hidden="true"' : ""}><img src="assets/works/${esc(f)}" alt="${copy ? "" : esc(alt)}"></div>`).join("")).join("")}</div></figure>${pauseBtn}</div>`
         : `<figure class="single"><img src="assets/works/${esc(c.imgs[0][0])}" alt="${esc(c.imgs[0][1])}"></figure>`;
     const list = rows => `<ul>${rows.map(([k, v]) => `<li${t(k + v)}><b>${esc(k)}</b>: ${esc(v)}</li>`).join("")}</ul>`;
     paperBody.innerHTML = `
@@ -954,7 +1077,7 @@
             `<a href="${esc(u)}"${u.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${esc(k)} ↗</a>`).join("")}</div>` : ""}
         </dl>
         <div>
-          ${(c.story || [["Why I Built It", [c.why]]]).map(([head, paras]) =>
+          ${(c.story || (c.why ? [["Why I Built It", [c.why]]] : [])).map(([head, paras]) =>
             `<section class="paper-sec"><h3>${esc(head)}</h3>${paras.map(x => `<p${t(x)}>${esc(x)}</p>`).join("")}</section>`).join("")}
           ${c.features && c.features.length ? `<section class="paper-sec"><h3>Features</h3>${list(c.features)}</section>` : ""}
           ${c.stack && c.stack.length ? `<section class="paper-sec"><h3>Tech Stack</h3>${list(c.stack)}</section>` : ""}
@@ -1029,6 +1152,22 @@
   });
   paperDlg.addEventListener("click", e => { if (e.target === paperDlg) closePaper(); });
   paper.querySelector(".paper-close").addEventListener("click", closePaper);
+  // the moving screenshot strip has its own pause button (hovering over it pauses it too)
+  paperBody.addEventListener("click", e => {
+    const b = e.target.closest(".pg-toggle");
+    if (!b) return;
+    const paused = b.parentElement.classList.toggle("paused");
+    b.setAttribute("aria-label", paused ? "Play the screenshots" : "Pause the screenshots");
+  });
+  // footer: copy the email address
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    const v = b.dataset.copy;
+    try { await navigator.clipboard.writeText(v); }
+    catch (err) { const t = document.createElement("textarea"); t.value = v; document.body.append(t); t.select(); document.execCommand("copy"); t.remove(); }
+    b.textContent = "copied ✓";
+    const live = b.parentElement.querySelector("[aria-live]"); if (live) live.textContent = "email address copied";
+    clearTimeout(b._t); b._t = setTimeout(() => { b.textContent = "copy"; if (live) live.textContent = ""; }, 1600);
+  }));
   document.querySelectorAll("[data-case]").forEach(a => a.addEventListener("click", e => {
     e.preventDefault();
     openPaper(a.dataset.case, a);
