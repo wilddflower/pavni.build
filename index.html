@@ -464,7 +464,7 @@
       <span class="sheet"><span class="shot-empty" aria-hidden="true"><i></i><i></i><i></i></span></span>
       <span class="front">
         <span class="row"><span class="title">Filo</span><span class="yr">2026</span></span>
-        <span class="sum">Finds the right people to follow on Twitter.</span>
+        <span class="sum">An AI agent that finds people on X who are ready to buy, and drafts the reply for you.</span>
         <span class="go">Open ↗</span>
       </span>
     </a>
@@ -862,13 +862,20 @@
     filo: {
       icon: "people",
       title: "Filo",
-      tag: "Finds the right people to follow on Twitter. [one more line on how it works]",
-      meta: [["Type", "[e.g. Web app]"], ["Role", "[e.g. Designer & Developer]"], ["Year", "2026"]],
+      tag: "An AI agent that finds people on X who are ready to buy, and drafts the reply for you.",
+      meta: [["Type", "Web app"], ["Role", "Designer & Developer"], ["Year", "2026"]],
       imgs: [],
-      why: "[why you made it]",
-      features: [["[Feature]", "[what it does]"], ["[Feature]", "[what it does]"]],
-      stack: [["[Frontend]", "[tools]"], ["[Backend]", "[tools]"]],
-      links: [["Live", "#"], ["Code", "#"]],
+      story: [
+        ["What I Made", ["Startups waste hours scrolling X looking for their first customers, so I wanted a tool that catches the posts where people are already asking for help."]],
+        ["What It Does", ["You pick the keywords that matter to your product. Filo searches X for posts with buying signals, like someone asking for a tool or complaining about a competitor, scores each one from 1 to 10, and lines them up on a dashboard. For the best leads, it drafts a reply in the tone you choose, and you copy it over yourself, because it never posts on its own."]],
+      ],
+      stack: [
+        ["Frontend", "Next.js, TypeScript, CSS Modules"],
+        ["Backend", "Node.js, Express"],
+        ["Data", "Playwright to read X, Supabase to store leads"],
+        ["AI", "Groq for drafting replies"],
+      ],
+      links: [["Code", "https://github.com/wilddflower/filo"]],
     },
     mochi: {
       icon: "timer", iconImg: "mochi-icon.png", iconBg: "#eef1ff",
