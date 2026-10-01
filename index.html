@@ -123,30 +123,33 @@
   /* experience: a row of navy-tinted cards; the one you point at opens up to show the details */
   .panel { max-width: 1240px; margin: 0 auto; padding: 48px 40px 24px; }
   [role="tabpanel"][hidden] { display: none; }
-  /* experience: a LinkedIn-style list, straight from my resume */
-  .jobs { max-width: 880px; padding: 4px 32px; border-radius: 26px; background: #fff; border: 1px solid #e6e9f6; box-shadow: 0 1px 2px rgba(31,45,102,.04), 0 22px 44px -30px rgba(31,45,102,.35); }
-  .job { display: grid; grid-template-columns: 52px minmax(0, 1fr); column-gap: 18px; }
-  .job-logo { display: block; width: 52px; height: 52px; margin-top: 26px; border-radius: 12px; object-fit: cover; background: #fff; box-shadow: 0 0 0 1px rgba(31,45,102,.08); }
-  .job-body { min-width: 0; padding: 26px 0 28px; }
-  .job + .job .job-body { border-top: 1px solid #edf0f8; }
-  .job-title { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; color: #16224f; }
-  .job-org { margin: 2px 0 0; font-size: 15px; color: #1f2d66; }
-  .job-org a { color: inherit; font-weight: 500; text-decoration: none; }
-  .job-org a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .job-org a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
-  .job-when { margin: 2px 0 0; font-size: 14px; color: #6b7086; font-variant-numeric: tabular-nums; }
-  .job-points { margin: 14px 0 0; padding-left: 18px; display: grid; gap: 8px; max-width: 70ch; }
-  .job-points li { padding-left: 3px; font-size: 15.5px; line-height: 1.55; color: #3d4256; }
-  .job-points li::marker { color: var(--peri); }
-  .job-points b { font-weight: 600; color: #16224f; }
-  /* a project attached to a role, like the media on a LinkedIn entry; the page flies out of the thumbnail */
-  .job-media { margin-top: 18px; display: inline-flex; align-items: center; gap: 14px; padding: 8px 20px 8px 8px; border-radius: 16px; border: 1px solid #e6e9f6; color: #16224f; text-decoration: none; transition: border-color .2s, box-shadow .25s, transform .25s cubic-bezier(.34,1.56,.64,1); }
-  .job-media:hover { border-color: #cfd6f3; box-shadow: 0 10px 22px -14px rgba(31,45,102,.4); transform: translateY(-1px); }
-  .job-media:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-  .job-thumb { flex: none; width: 112px; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px rgba(31,45,102,.08); }
-  .job-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-  .job-media-text { display: grid; gap: 2px; font-size: 14.5px; font-weight: 600; letter-spacing: -0.01em; }
-  .job-media-text span { font-size: 13px; font-weight: 400; color: #6b7086; }
+  .xp-row { display: flex; gap: 16px; height: 360px; }
+  .xp { position: relative; isolation: isolate; overflow: hidden; flex: 1 1 0; min-width: 0; border-radius: 26px; padding: 26px 28px 24px; background: #dfe5fb; color: #1f2d66; cursor: pointer; transition: flex-grow .6s cubic-bezier(.3,.7,.3,1), background-color .4s; }
+  .xp::before, .xp::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; background: rgba(255,255,255,.5); transition: transform .6s cubic-bezier(.3,.7,.3,1); }
+  .xp::before { width: 150px; height: 150px; left: -40px; bottom: -50px; }
+  .xp::after { width: 64px; height: 64px; left: 84px; bottom: 60px; }
+  .xp.on { flex-grow: 2.3; background: #f1f3fa; cursor: default; }
+  .xp.on::before { transform: scale(1.25); }
+  .xp-text { position: relative; height: 100%; display: flex; flex-direction: column; max-width: 100%; transition: max-width .6s; }
+  .xp.on:has(.xp-pic) .xp-text { max-width: 50%; }
+  .xp-when { min-height: 1.5em; font-size: 13px; font-weight: 500; color: #1f2d66; letter-spacing: 0; }
+  .xp-title { margin-top: 6px; font-size: clamp(22px, 2vw, 28px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: #16224f; }
+  .xp-org { margin-top: 8px; font-size: 14px; line-height: 1.4; color: #46508f; }
+  /* the resume lines show on the card that's open (all of them on phones) */
+  .xp-desc { margin: 14px 0 0; padding-left: 18px; display: none; gap: 6px; }
+  .xp.on .xp-desc { display: grid; animation: xp-in .4s ease .28s both; }
+  @keyframes xp-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .xp-desc li { padding-left: 2px; font-size: 15px; line-height: 1.45; color: #46508f; }
+  .xp-desc li::marker { color: var(--peri); }
+  .xp-desc b { font-weight: 600; color: #1f2d66; }
+  .xp-foot { position: absolute; left: 0; bottom: 0; display: flex; align-items: center; gap: 14px; font-size: 14px; font-weight: 500; color: #1f2d66; }
+  .xp-go { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: #1f2d66; box-shadow: 0 1px 2px rgba(0,0,0,.08); transition: background-color .3s, color .3s, transform .3s; }
+  .xp.on .xp-go { background: #1f2d66; color: #fff; }
+  .xp-go:hover { transform: rotate(45deg); }
+  .xp-go:focus-visible { outline: 2px solid #1f2d66; outline-offset: 3px; }
+  .xp-pic { position: absolute; top: 18px; right: 18px; bottom: 18px; width: calc(46% - 18px); border-radius: 18px; overflow: hidden; background: #fff; opacity: 0; transform: translateX(24px) scale(.96); transition: opacity .35s, transform .5s cubic-bezier(.3,.7,.3,1); }
+  .xp.on .xp-pic { opacity: 1; transform: none; transition-delay: .18s; }
+  .xp-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* leadership: quiet cards in the site's blues (the keepsakes stay in the hero) */
   .oc-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding-top: 8px; }
@@ -361,6 +364,13 @@
     .board { position: relative; inset: auto; width: min(100%, 480px); aspect-ratio: 5 / 8; align-self: center; margin: 16px 0 40px; --u: 1.3cqw; }
     .item { left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); width: calc(var(--mw, var(--w)) * var(--u)); }
     .board .desk-only { display: none; }
+    .xp-row { flex-direction: column; height: auto; }
+    .xp, .xp.on { flex: none; background: #eef1fb; cursor: default; }
+    .xp-text, .xp.on .xp-text { max-width: 100%; height: auto; }
+    .xp-desc, .xp.on .xp-desc { display: grid; animation: none; }
+    .xp-foot { position: static; margin-top: 20px; }
+    .xp-go { background: #1f2d66; color: #fff; }
+    .xp-pic { position: relative; inset: auto; width: 100%; height: 160px; margin-top: 18px; opacity: 1; transform: none; }
   }
   @media (max-width: 760px) {
     :root { --edge: 20px; }
@@ -373,13 +383,6 @@
     .seg-row { padding: 0 20px; margin-top: 20px; }
     .seg button { padding: 9px 14px; font-size: 14px; }
     .panel { padding: 32px 20px 16px; }
-    .jobs { padding: 2px 18px; border-radius: 22px; }
-    .job { grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; }
-    .job-logo { width: 44px; height: 44px; border-radius: 10px; margin-top: 22px; }
-    .job-body { padding: 22px 0 24px; }
-    .job-title { font-size: 17px; }
-    .job-points li { font-size: 15px; }
-    .job-media { display: flex; }
     .paper-dlg { padding: 10px 8px; }
     .paper { min-height: 0; }
     .paper { border-radius: 22px; }
@@ -399,11 +402,11 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .js .ch, .js .meta, .js .cta, .down, .js .item.confetti, .js .hint mark::before { animation: none !important; }
-    .folder .sheet, .folder .front, .item, .job-media, .btn { transition: none !important; }
+    .folder .sheet, .folder .front, .item, .xp, .xp *, .btn { transition: none !important; }
     .paper figure.is-loop { overflow-x: auto; }
     .pg-run { animation: none; }
     .pg-slide[aria-hidden="true"], .pg-toggle { display: none; }
-    .swap { animation: none; }
+    .swap, .xp.on .xp-desc { animation: none; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
   }
 </style>
@@ -517,47 +520,41 @@
     </a>
   </div>
   <div class="panel" id="panel-experience" role="tabpanel" aria-labelledby="tab-experience" hidden>
-    <!-- straight from my resume. to add a role, copy one <article class="job"> block.
-         data-from / data-to on .job-dur are the first and last month (leave data-to off while it's still going) -->
-    <div class="jobs">
-      <article class="job">
-        <img class="job-logo" src="assets/works/withe-logo.svg" width="52" height="52" alt="">
-        <div class="job-body">
-          <h3 class="job-title">GTM &amp; Operations Intern</h3>
-          <p class="job-org"><a href="https://withe.co" target="_blank" rel="noopener">Withe</a> · OS for career fairs</p>
-          <p class="job-when">Aug 2026 – Present<span class="job-dur" data-from="2026-08"></span></p>
-          <ul class="job-points">
+    <!-- straight from my resume. to add a picture to a card, put this right after its xp-text div: <div class="xp-pic"><img src="assets/works/withe.png" alt=""></div> -->
+    <div class="xp-row">
+      <article class="xp on">
+        <div class="xp-text">
+          <p class="xp-when">Aug 2026 – Present</p>
+          <h3 class="xp-title">GTM &amp; Operations Intern<br>@ Withe</h3>
+          <p class="xp-org">OS for career fairs</p>
+          <ul class="xp-desc">
             <li><b>Co-built Withe’s in-app help center: 25 articles, 13 demos,</b> and the code behind it.</li>
             <li>Debug and ship <b>fixes and new features</b> to the live product.</li>
             <li>Growing distribution for <b>Talent Sync</b>, Withe’s second product.</li>
           </ul>
+          <p class="xp-foot">Read more <a class="xp-go" href="https://withe.co" target="_blank" rel="noopener" aria-label="withe.co"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a></p>
         </div>
       </article>
-      <article class="job">
-        <img class="job-logo" src="assets/works/althra-logo.png" width="52" height="52" alt="">
-        <div class="job-body">
-          <h3 class="job-title">Growth &amp; Marketing Intern</h3>
-          <p class="job-org"><a href="https://althra.ca" target="_blank" rel="noopener">Althra</a> · Vancouver’s startup incubator</p>
-          <p class="job-when">Jun 2026 – Aug 2026<span class="job-dur" data-from="2026-06" data-to="2026-08"></span></p>
-          <ul class="job-points">
+      <article class="xp">
+        <div class="xp-text">
+          <p class="xp-when">Jun 2026 – Aug 2026</p>
+          <h3 class="xp-title">Growth &amp; Marketing Intern<br>@ Althra</h3>
+          <p class="xp-org">Vancouver’s startup incubator</p>
+          <ul class="xp-desc">
             <li>Ran Althra’s social media, including a <b>zero-cost UGC campaign</b> that drove <b>60K+ impressions</b> and <b>300+ new followers.</b></li>
           </ul>
+          <p class="xp-foot">Read more <a class="xp-go" href="https://althra.ca" target="_blank" rel="noopener" aria-label="althra.ca"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a></p>
         </div>
       </article>
-      <article class="job">
-        <img class="job-logo" src="assets/works/chess-icon.png" width="52" height="52" alt="">
-        <div class="job-body">
-          <h3 class="job-title">Chess Tutoring Business &amp; App</h3>
-          <p class="job-org">Self-employed</p>
-          <p class="job-when">Jan 2026 – Sep 2026<span class="job-dur" data-from="2026-01" data-to="2026-09"></span></p>
-          <ul class="job-points">
+      <article class="xp">
+        <div class="xp-text">
+          <p class="xp-when">Jan 2026 – Sep 2026</p>
+          <h3 class="xp-title">Chess Tutoring Business &amp; App</h3>
+          <ul class="xp-desc">
             <li>Designed and built a <b>Duolingo-style chess app</b> and <b>student-teacher platform</b> to run lessons.</li>
             <li>Taught <b>20+ students</b> and grew to <b>$10K ARR.</b></li>
           </ul>
-          <a class="job-media" href="#work-chess" data-case="chess">
-            <span class="job-thumb sheet"><img src="assets/works/brainychamps-home.webp" width="1440" height="810" alt=""></span>
-            <span class="job-media-text">Chess Learning Platform<span>Open ↗</span></span>
-          </a>
+          <p class="xp-foot">Read more <a class="xp-go" href="#work-chess" data-case="chess" aria-label="open the chess learning platform project"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a></p>
         </div>
       </article>
     </div>
@@ -708,7 +705,7 @@
       const panel = document.getElementById(t.getAttribute("aria-controls"));
       panel.hidden = !on;
       if (on && !still) {
-        panel.querySelectorAll(".folder, .job, .oc").forEach((el, k) => {
+        panel.querySelectorAll(".folder, .xp, .oc").forEach((el, k) => {
           el.classList.remove("swap");
           void el.offsetWidth;
           el.style.animationDelay = `${k * 80}ms`;
@@ -733,14 +730,10 @@
     });
   });
 
-  // experience: how long each role ran, LinkedIn style ("· 3 mos"), counting the first and last month
-  const today = new Date();
-  document.querySelectorAll(".job-dur").forEach(el => {
-    const [fy, fm] = el.dataset.from.split("-").map(Number);
-    const [ty, tm] = el.dataset.to ? el.dataset.to.split("-").map(Number) : [today.getFullYear(), today.getMonth() + 1];
-    const n = (ty - fy) * 12 + tm - fm + 1, y = Math.floor(n / 12), m = n % 12;
-    el.textContent = " · " + [y && `${y} yr${y > 1 ? "s" : ""}`, m && `${m} mo${m > 1 ? "s" : ""}`].filter(Boolean).join(" ");
-  });
+  // experience: the card you point at, tap or tab into opens up
+  const xps = [...document.querySelectorAll(".xp")];
+  const openXp = c => xps.forEach(x => x.classList.toggle("on", x === c));
+  xps.forEach(c => ["mouseenter", "click", "focusin"].forEach(ev => c.addEventListener(ev, () => openXp(c))));
   addEventListener("resize", ends);
   ends();
   if (matchMedia("(hover: none)").matches && "IntersectionObserver" in window) {
