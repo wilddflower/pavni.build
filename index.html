@@ -67,12 +67,12 @@
   .meta a { color: inherit; text-decoration: underline; text-decoration-color: var(--peri); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .2s, text-decoration-color .2s; }
   .meta a:hover { color: var(--blue); text-decoration-color: var(--blue); }
   /* availability badge + the two things a recruiter wants: resume and email */
-  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 18px; }
-  .btn { display: inline-flex; align-items: center; gap: 6px; height: 42px; padding: 0 20px; border-radius: 980px; border: 1.5px solid var(--blue-200); background: #fff; color: var(--ink); font-size: 15px; font-weight: 500; letter-spacing: -0.015em; text-decoration: none; white-space: nowrap; transition: background-color .2s, border-color .2s, color .2s, transform .25s cubic-bezier(.34,1.56,.64,1); }
-  .btn:hover { border-color: var(--peri); color: var(--peri); transform: translateY(-1px); }
-  .btn.primary { background: var(--peri); border-color: var(--peri); color: #fff; }
-  .btn.primary:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
-  .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 14px 0 0 -10px; }
+  /* email, linkedin, github, x: plain icons in the accent blue */
+  .cta a { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; color: var(--peri); transition: color .2s, transform .3s cubic-bezier(.34,1.56,.64,1); }
+  .cta a svg { display: block; width: 24px; height: 24px; }
+  .cta a:hover { color: var(--blue); transform: translateY(-2px); }
+  .cta a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
   /* name hops in letter by letter, roles word by word (spans added by the script below) */
   .word { display: inline-block; white-space: nowrap; }
@@ -92,7 +92,6 @@
   .section { max-width: 1240px; margin: 0 auto; padding: 120px 40px; }
   .label { font-size: 14px; font-weight: 500; color: var(--mute); letter-spacing: -0.01em; }
   /* section headings: big like a new slide, same style as the giant name */
-  .heading.sm { font-size: clamp(52px, min(7.5vw, 13vh), 110px); }
   .heading { margin: 0 0 0 -0.04em; font-size: clamp(64px, min(11vw, 18vh), 160px); font-weight: 600; letter-spacing: -0.055em; line-height: .95; color: var(--peri); }
 
   /* works: a sideways shelf of folders */
@@ -107,10 +106,10 @@
   .seg { display: inline-flex; gap: 4px; padding: 4px; border-radius: 980px; background: #eef1ff; }
   .seg { transition: background-color .3s; }
   .seg[data-active="experience"] { background: #e8ebf7; }
-  .seg[data-active="leadership"] { background: #e9edff; }
+  .seg[data-active="community"] { background: #e9edff; }
   .seg button[data-seg="projects"] { --seg: var(--peri); }
   .seg button[data-seg="experience"] { --seg: #1f2d66; }
-  .seg button[data-seg="leadership"] { --seg: #3a53d9; }
+  .seg button[data-seg="community"] { --seg: #3a53d9; }
   /* a touch deeper while it isn't selected, so it stays readable on the tinted track */
   .seg button[data-seg="projects"][aria-selected="false"] { color: #4f5fbd; }
   .seg button { font: inherit; font-size: 15px; font-weight: 500; letter-spacing: -0.015em; color: var(--seg); background: none; border: 0; border-radius: 980px; padding: 9px 20px; min-height: 40px; cursor: pointer; transition: background-color .25s, color .25s, box-shadow .25s; }
@@ -123,17 +122,25 @@
   /* experience: a row of navy-tinted cards; the one you point at opens up to show the details */
   .panel { max-width: 1240px; margin: 0 auto; padding: 48px 40px 24px; }
   [role="tabpanel"][hidden] { display: none; }
-  .xp-row { display: flex; gap: 16px; height: 360px; }
+  .xp-row { display: flex; gap: 16px; height: 380px; }
   .xp { position: relative; isolation: isolate; overflow: hidden; flex: 1 1 0; min-width: 0; border-radius: 26px; padding: 26px 28px 24px; background: #dfe5fb; color: #1f2d66; cursor: pointer; transition: flex-grow .6s cubic-bezier(.3,.7,.3,1), background-color .4s; }
   .xp::before, .xp::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; background: rgba(255,255,255,.5); transition: transform .6s cubic-bezier(.3,.7,.3,1); }
   .xp::before { width: 150px; height: 150px; left: -40px; bottom: -50px; }
   .xp::after { width: 64px; height: 64px; left: 84px; bottom: 60px; }
   .xp.on { flex-grow: 2.3; background: #f1f3fa; cursor: default; }
   .xp.on::before { transform: scale(1.25); }
+  /* on laptops the small bubble drifts down as a card opens, clear of the last line */
+  @media (min-width: 1101px) { .xp.on::after { transform: translateY(12px); } }
   .xp-text { position: relative; height: 100%; display: flex; flex-direction: column; max-width: 100%; transition: max-width .6s; }
   .xp.on:has(.xp-pic) .xp-text { max-width: 50%; }
   .xp-when { min-height: 1.5em; font-size: 13px; font-weight: 500; color: #1f2d66; letter-spacing: 0; }
-  .xp-title { margin-top: 6px; font-size: clamp(22px, 2vw, 28px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: #16224f; }
+  .xp-title { margin-top: 6px; font-size: clamp(22px, 2vw, 27px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: #16224f; }
+  /* the company's logo shares the top line with the dates */
+  .xp-text { display: grid; grid-template-columns: 34px minmax(0, 1fr); grid-auto-rows: min-content; column-gap: 12px; align-content: start; }
+  .xp-text > * { grid-column: 1 / -1; }
+  .xp-logo { grid-row: 1; grid-column: 1; display: block; width: 34px; height: 34px; border-radius: 8px; object-fit: cover; background: #fff; box-shadow: 0 0 0 1px rgba(31,45,102,.1), 0 2px 5px -2px rgba(31,45,102,.25); }
+  .xp-text:has(> .xp-logo) > .xp-when { grid-row: 1; grid-column: 2; align-self: center; min-height: 0; }
+  .xp-text:has(> .xp-logo) > .xp-title { margin-top: 12px; }
   .xp-org { margin-top: 8px; font-size: 14px; line-height: 1.4; color: #46508f; }
   /* the resume lines show on the card that's open (all of them on phones) */
   .xp-desc { margin: 14px 0 0; padding-left: 18px; display: none; gap: 6px; }
@@ -151,13 +158,49 @@
   .xp.on .xp-pic { opacity: 1; transform: none; transition-delay: .18s; }
   .xp-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* leadership: quiet cards in the site's blues (the keepsakes stay in the hero) */
+  /* community: glossy cards with the photo soft in the background; they tilt toward the pointer and catch the light.
+     the link (.oc) stays flat so it's a steady target under the pointer; only the card inside it (.oc-card) tilts */
   .oc-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding-top: 8px; }
-  .oc { position: relative; min-width: 0; min-height: 210px; border-radius: 26px; padding: 26px 28px 28px; display: flex; flex-direction: column; color: #1f2d66; background: linear-gradient(160deg, #f3f5ff 0%, #e2e7ff 100%); border: 1px solid #e3e7fb; }
-  .oc-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: #fff; color: var(--peri); box-shadow: 0 1px 2px rgba(31,45,102,.08), 0 8px 18px -8px rgba(31,45,102,.3); }
-  .oc-icon svg { width: 22px; height: 22px; }
-  .oc-role { margin-top: auto; padding-top: 28px; font-size: 13px; font-weight: 500; color: #46508f; letter-spacing: 0; }
-  .oc-name { margin-top: 6px; font-size: clamp(21px, 1.8vw, 25px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: #16224f; }
+  .oc { --rx: 0deg; --ry: 0deg; --gx: 30%; --gy: 0%; display: flex; min-width: 0; border-radius: 26px; color: #1f2d66; text-decoration: none; }
+  .oc:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+  .oc-card { position: relative; isolation: isolate; flex: 1; min-width: 0; min-height: 210px; border-radius: 26px; padding: 26px 28px 28px; display: flex; flex-direction: column;
+    background: linear-gradient(160deg, #f3f5ff 0%, #e2e7ff 100%); border: 1px solid #e3e7fb; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(31,45,102,.06), 0 18px 36px -24px rgba(31,45,102,.45);
+    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .4s; }
+  .oc.tilting .oc-card { transition: transform .1s linear, box-shadow .4s; }
+  /* the photo: soft behind the words, fully clear when you point at the card; it fades in once it has loaded */
+  .oc-photo { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: inherit; transition: opacity .5s; }
+  .js .oc-photo:not(.in) { opacity: 0; }
+  .oc-photo img { position: absolute; left: -6px; top: -6px; width: calc(100% + 12px); height: calc(100% + 12px); object-fit: cover; opacity: .82; filter: blur(.4px); transition: opacity .5s, filter .5s; }
+  /* a light wash low down so the words stay easy to read */
+  .oc-photo::after { content: ""; position: absolute; inset: 0;
+    background: radial-gradient(130% 78% at 0% 100%, rgba(238,241,255,.64) 0%, rgba(238,241,255,.44) 48%, rgba(238,241,255,0) 78%),
+      linear-gradient(180deg, rgba(238,241,255,0) 24%, rgba(238,241,255,.74) 54%, rgba(238,241,255,.92) 100%); }
+  /* gloss: a soft reflection across the top, always there */
+  .oc-card::before { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none;
+    background: linear-gradient(160deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,.1) 26%, rgba(255,255,255,0) 40%); }
+  /* shine: a glow that follows the pointer… */
+  .oc-card::after { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .4s;
+    background: radial-gradient(circle at var(--gx) var(--gy), rgba(255,255,255,.62), rgba(255,255,255,.2) 24%, rgba(255,255,255,0) 50%); }
+  /* …and a streak of light that sweeps across as you arrive */
+  .oc-shine { position: absolute; inset: 0; z-index: 3; border-radius: inherit; overflow: hidden; pointer-events: none; }
+  .oc-shine::before { content: ""; position: absolute; top: -40%; bottom: -40%; left: -60%; width: 45%; opacity: 0; transform: rotate(18deg);
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.75) 50%, rgba(255,255,255,0)); }
+  @keyframes oc-sweep { 0% { opacity: 0; transform: translateX(0) rotate(18deg); } 12% { opacity: 1; } 78% { opacity: 1; } 100% { opacity: 0; transform: translateX(400%) rotate(18deg); } }
+  /* the hover looks are for a mouse or trackpad (a tap on a phone would leave them stuck on); keyboard focus gets them too */
+  @media (hover: hover) and (pointer: fine) {
+    .oc:hover .oc-card { box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 2px 4px rgba(31,45,102,.08), 0 34px 54px -28px rgba(31,45,102,.55); }
+    .oc:hover .oc-photo img { opacity: .94; filter: none; }
+    .oc:hover .oc-card::after { opacity: 1; }
+    .oc:hover .oc-shine::before { animation: oc-sweep 1.1s ease-in-out; }
+  }
+  .oc:focus-visible .oc-photo img { opacity: .94; filter: none; }
+  .oc:focus-visible .oc-card::after { opacity: 1; }
+  .oc:focus-visible .oc-shine::before { animation: oc-sweep 1.1s ease-in-out; }
+  /* the words sit above the light layers, so the glow and the sweep light the photo but never wash out the text */
+  .oc-role, .oc-name { position: relative; z-index: 4; text-shadow: 0 0 10px rgba(238,241,255,.95), 0 0 3px rgba(238,241,255,.95); }
+  .oc-role { margin: auto 0 0; padding-top: 28px; display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: #2f3b85; letter-spacing: 0; }
+  .oc-logo { flex: none; width: 30px; height: 30px; border-radius: 7px; box-shadow: 0 0 0 1px rgba(31,45,102,.1), 0 2px 5px -2px rgba(31,45,102,.25); }
+  .oc-name { margin: 6px 0 0; font-size: clamp(20px, 1.8vw, 23px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: #16224f; text-wrap: balance; }
 
   /* project paper: flies out of its folder and opens as a clean project page */
   html.paper-open { overflow: hidden; }
@@ -266,7 +309,7 @@
   .today { margin-top: 40px; font-size: clamp(24px, 2.8vw, 36px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.3; color: var(--mute); max-width: 30ch; }
   .today b { color: var(--ink); font-weight: 500; }
   /* about: one centred column, big friendly type, blue links */
-  .about-col { max-width: 990px; margin: 0 auto; }
+  .about-col { max-width: 990px; }
   .about-body { margin-top: 36px; }
   .about-body p { margin: 0; font-size: clamp(21px, 2.15vw, 31px); line-height: 1.38; font-weight: 400; letter-spacing: -0.022em; color: var(--ink); }
   .about-body p + p { margin-top: 1.05em; }
@@ -347,12 +390,6 @@
   .links a:hover { transform: translateY(-3px) scale(1.08); }
   .links a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .xoxo { font-size: 15px; font-weight: 500; }
-  .mail-row { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-  .mail { color: #fff; font-size: clamp(17px, 1.6vw, 21px); font-weight: 500; letter-spacing: -0.015em; text-decoration: underline; text-decoration-color: rgba(255,255,255,.5); text-decoration-thickness: 1.5px; text-underline-offset: 5px; overflow-wrap: anywhere; }
-  .mail:hover { text-decoration-color: #fff; }
-  .copy { font: inherit; font-size: 13px; font-weight: 600; color: var(--peri); background: #fff; border: 0; border-radius: 980px; padding: 7px 14px; min-height: 32px; cursor: pointer; transition: transform .2s; }
-  .copy:hover { transform: translateY(-1px); }
-  .copy:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .fine { margin-top: 72px; align-items: baseline; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.35); font-size: 13px; color: #fff; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
   /* sections ease in as you scroll to them */
@@ -402,11 +439,12 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .js .ch, .js .meta, .js .cta, .down, .js .item.confetti, .js .hint mark::before { animation: none !important; }
-    .folder .sheet, .folder .front, .item, .xp, .xp *, .btn { transition: none !important; }
+    .folder .sheet, .folder .front, .item, .xp, .xp *, .xp::before, .xp::after, .cta a { transition: none !important; }
     .paper figure.is-loop { overflow-x: auto; }
     .pg-run { animation: none; }
     .pg-slide[aria-hidden="true"], .pg-toggle { display: none; }
-    .swap, .xp.on .xp-desc { animation: none; }
+    .swap, .xp.on .xp-desc, .oc:hover .oc-shine::before, .oc:focus-visible .oc-shine::before { animation: none; }
+    .oc-card, .oc-card::after, .oc-photo, .oc-photo img { transition: none !important; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
   }
 </style>
@@ -431,8 +469,10 @@
         open to <b>winter &amp; summer ’27</b> <span class="nw">internship opportunities</span>
       </p>
       <div class="cta">
-        <a class="btn primary" href="mailto:pavnilabade07@gmail.com?subject=Resume%20request">email me for my resume</a>
-        <a class="btn" href="https://www.linkedin.com/in/pavnilabade" target="_blank" rel="noopener">linkedin <span aria-hidden="true">↗</span></a>
+        <a href="mailto:pavnilabade07@gmail.com" aria-label="email pavnilabade07@gmail.com"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></a>
+        <a href="https://www.linkedin.com/in/pavnilabade" target="_blank" rel="noopener" aria-label="linkedin"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://github.com/wilddflower" target="_blank" rel="noopener" aria-label="github"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a href="https://x.com/pavni_ll" target="_blank" rel="noopener" aria-label="x (twitter)"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
       </div>
       <p class="hint"><mark>drag the magnets around!</mark></p>
     </div>
@@ -474,7 +514,7 @@
     <div class="seg" role="tablist" aria-label="Kinds of work" data-active="projects">
       <button role="tab" id="tab-projects" aria-selected="true" aria-controls="panel-projects" data-seg="projects">projects</button>
       <button role="tab" id="tab-experience" aria-selected="false" aria-controls="panel-experience" data-seg="experience" tabindex="-1">experience</button>
-      <button role="tab" id="tab-leadership" aria-selected="false" aria-controls="panel-leadership" data-seg="leadership" tabindex="-1">leadership</button>
+      <button role="tab" id="tab-community" aria-selected="false" aria-controls="panel-community" data-seg="community" tabindex="-1">community</button>
     </div>
     <div class="arrows">
       <button class="prev" aria-label="Previous project"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2L4 7l5 5"/></svg></button>
@@ -524,8 +564,9 @@
     <div class="xp-row">
       <article class="xp on">
         <div class="xp-text">
+          <img class="xp-logo" src="assets/works/withe-logo.svg" width="34" height="34" alt="">
           <p class="xp-when">Aug 2026 – Present</p>
-          <h3 class="xp-title">GTM &amp; Operations Intern<br>@ Withe</h3>
+          <h3 class="xp-title">GTM &amp; Operations&nbsp;Intern<br>@ Withe</h3>
           <p class="xp-org">OS for career fairs</p>
           <ul class="xp-desc">
             <li><b>Co-built Withe’s in-app help center: 25 articles, 13 demos,</b> and the code behind it.</li>
@@ -537,8 +578,9 @@
       </article>
       <article class="xp">
         <div class="xp-text">
+          <img class="xp-logo" src="assets/works/althra-logo.png" width="34" height="34" alt="">
           <p class="xp-when">Jun 2026 – Aug 2026</p>
-          <h3 class="xp-title">Growth &amp; Marketing Intern<br>@ Althra</h3>
+          <h3 class="xp-title">Growth &amp; Marketing&nbsp;Intern<br>@ Althra</h3>
           <p class="xp-org">Vancouver’s startup incubator</p>
           <ul class="xp-desc">
             <li>Ran Althra’s social media, including a <b>zero-cost UGC campaign</b> that drove <b>60K+ impressions</b> and <b>300+ new followers.</b></li>
@@ -546,50 +588,49 @@
           <p class="xp-foot">Read more <a class="xp-go" href="https://althra.ca" target="_blank" rel="noopener" aria-label="althra.ca"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a></p>
         </div>
       </article>
-      <article class="xp">
-        <div class="xp-text">
-          <p class="xp-when">Jan 2026 – Sep 2026</p>
-          <h3 class="xp-title">Chess Tutoring Business &amp; App</h3>
-          <ul class="xp-desc">
-            <li>Designed and built a <b>Duolingo-style chess app</b> and <b>student-teacher platform</b> to run lessons.</li>
-            <li>Taught <b>20+ students</b> and grew to <b>$10K ARR.</b></li>
-          </ul>
-          <p class="xp-foot">Read more <a class="xp-go" href="#work-chess" data-case="chess" aria-label="open the chess learning platform project"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a></p>
-        </div>
-      </article>
     </div>
   </div>
-  <div class="panel" id="panel-leadership" role="tabpanel" aria-labelledby="tab-leadership" hidden>
-    <!-- to make a card a link, change <article class="oc"> … </article> to <a class="oc" href="https://…" target="_blank" rel="noopener"> … </a> -->
+  <div class="panel" id="panel-community" role="tabpanel" aria-labelledby="tab-community" hidden>
+    <!-- to put a photo behind a card's words, add this as the card's first line: <span class="oc-photo" aria-hidden="true"><img src="assets/community/photo.webp" alt="" loading="lazy"></span>
+         each card is a link: change its href (and its aria-label) to send it somewhere else -->
     <div class="oc-row">
-      <article class="oc">
-        <span class="oc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.8-4.8 5.5-4.8s4.9 1.8 5.5 4.8"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.3c2.3.2 3.9 1.8 4.5 4.2"/></svg></span>
-        <p class="oc-role">Founder &amp; Chair</p>
-        <h3 class="oc-name">Burnaby South Youth Council</h3>
-      </article>
-      <article class="oc">
-        <span class="oc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></svg></span>
-        <p class="oc-role">Executive Director</p>
-        <h3 class="oc-name">EMGirls Vancouver</h3>
-      </article>
-      <article class="oc">
-        <span class="oc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.6 13.4 7.5 21l4.5-2.6 4.5 2.6-1.1-7.6"/></svg></span>
-        <p class="oc-role">Scholar</p>
-        <h3 class="oc-name">Cansbridge Scholars</h3>
-      </article>
+      <a class="oc" href="https://impactjournal.porteaccelerator.com/p/meet-the-16-year-old-interviewing-forbes-dragon-s-den-shark-tank-entrepreneurs-here-s-how-she-does-i-37bf" target="_blank" rel="noopener" aria-label="Meet the Students Behind Empower Girls, an article in the Porte Impact Journal (opens in a new tab)">
+        <div class="oc-card">
+          <span class="oc-photo" aria-hidden="true"><img src="assets/community/emgirls-event.webp" width="960" height="531" alt="" loading="lazy"></span>
+          <p class="oc-role"><img class="oc-logo" src="assets/community/emgirls-logo.png" width="30" height="30" alt="">Executive Director</p>
+          <h3 class="oc-name">EMGirls Vancouver</h3>
+          <span class="oc-shine" aria-hidden="true"></span>
+        </div>
+      </a>
+      <a class="oc" href="https://www.cansbridgescholars.com/" target="_blank" rel="noopener" aria-label="Cansbridge Scholars website (opens in a new tab)">
+        <div class="oc-card">
+          <span class="oc-photo" aria-hidden="true"><img src="assets/community/cansbridge-event.webp" width="960" height="720" alt="" loading="lazy"></span>
+          <p class="oc-role"><img class="oc-logo" src="assets/community/cansbridge-logo.png" width="30" height="30" alt="">Scholar</p>
+          <h3 class="oc-name">Cansbridge Scholars</h3>
+          <span class="oc-shine" aria-hidden="true"></span>
+        </div>
+      </a>
+      <a class="oc" href="https://www.instagram.com/burnabyyouthcouncil/" target="_blank" rel="noopener" aria-label="Burnaby South Youth Council on Instagram (opens in a new tab)">
+        <div class="oc-card">
+          <span class="oc-photo" aria-hidden="true"><img src="assets/community/holiday-group.webp" width="960" height="720" alt="" loading="lazy"></span>
+          <p class="oc-role"><img class="oc-logo" src="assets/community/bsyc-logo.png" width="30" height="30" alt="">Founder &amp; Chair</p>
+          <h3 class="oc-name">Burnaby South Youth Council</h3>
+          <span class="oc-shine" aria-hidden="true"></span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
 
 <section class="section about" id="about">
   <div class="about-col">
-    <h2 class="heading sm reveal">about</h2>
+    <h2 class="heading reveal">about</h2>
     <div class="about-body reveal">
       <p>Hi, I’m Pavni, a second-year <a href="https://you.ubc.ca/programs/business-computer-science/" target="_blank" rel="noopener">Business + Computer Science</a> student at <a href="https://www.ubc.ca" target="_blank" rel="noopener">UBC</a>.</p>
-      <p>Growing up, I never related to the idea of “work-life balance,” where work drains you and life is what recharges you. I’ve always wanted a career that’s the reason I get up in the morning, excited to build.</p>
-      <p>Right now, I’m figuring out what that is, whether it’s in tech, building startups and communities, or exploring new fields altogether. The best way I’ve found is to put myself in rooms full of ambitious, driven people.</p>
-      <p>In the future, I want to build products that aren’t just functional, but create experiences people genuinely enjoy and look forward to using.</p>
-      <p>Thanks for visiting my site. If any of this resonates, <a href="#contact">let’s connect!</a></p>
+      <p>Growing up, I never understood “work-life balance,” the idea that work drains you, life recharges you, and you stay stuck in that loop for the rest of your time on earth. I’ve always imagined a career that’s the reason I get up in the morning, excited to build.</p>
+      <p>I’m still figuring out what that looks like: tech, startups, community building, or something I haven’t found yet. For now, I’m figuring it out by putting myself out there and in rooms full of ambitious, driven people.</p>
+      <p>Eventually, I hope to build products that solve real problems, excite me as much as the people using them, and that people truly look forward to coming back to.</p>
+      <p>Thanks for stopping by. If any of this resonates, <a href="#contact">let’s connect!</a></p>
     </div>
   </div>
 </section>
@@ -604,11 +645,6 @@
         <a href="https://github.com/wilddflower" target="_blank" rel="noopener" aria-label="github"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
         <a href="https://x.com/pavni_ll" target="_blank" rel="noopener" aria-label="x (twitter)"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
       </div>
-    </div>
-    <div class="mail-row">
-      <a class="mail" href="mailto:pavnilabade07@gmail.com">pavnilabade07@gmail.com</a>
-      <button class="copy" type="button" data-copy="pavnilabade07@gmail.com">copy</button>
-      <span class="sr" aria-live="polite"></span>
     </div>
     <div class="fine"><span>© 2026 Pavni Labade</span><span class="xoxo">xoxo pavni</span></div>
   </div>
@@ -694,9 +730,11 @@
     if (f && f.matches(":focus-visible")) f.scrollIntoView({ inline: "nearest", block: "nearest", behavior: still ? "auto" : "smooth" });
   });
 
-  // projects / experience / leadership: each has its own panel and its own colour on the switch
+  // projects / experience / community: each has its own panel and its own colour on the switch
   const seg = document.querySelector(".seg");
   const tabs = [...seg.querySelectorAll("[role=tab]")];
+  // the swap-in animation lets go once it's done, so it doesn't hold the cards' own transforms (the community tilt)
+  const unswap = e => { if (e.target === e.currentTarget && e.animationName === "swap") e.currentTarget.classList.remove("swap"); };
   const pick = tab => {
     tabs.forEach(t => {
       const on = t === tab;
@@ -710,6 +748,7 @@
           void el.offsetWidth;
           el.style.animationDelay = `${k * 80}ms`;
           el.classList.add("swap", "in");
+          el.addEventListener("animationend", unswap);
         });
       }
     });
@@ -728,6 +767,34 @@
       n.focus();
       pick(n);
     });
+  });
+
+  // community: the glossy cards tilt toward the pointer and the shine follows it (mouse/trackpad only, never with reduced motion).
+  // the link itself stays flat, so its edge can't slip out from under the pointer; only the card inside it moves
+  const calm = matchMedia("(prefers-reduced-motion: reduce)");
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.querySelectorAll(".oc").forEach(link => {
+      link.addEventListener("pointermove", e => {
+        if (calm.matches) return;
+        const r = link.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        link.classList.add("tilting");
+        link.style.setProperty("--ry", `${((x - .5) * 12).toFixed(2)}deg`);
+        link.style.setProperty("--rx", `${((.5 - y) * 10).toFixed(2)}deg`);
+        link.style.setProperty("--gx", `${(x * 100).toFixed(1)}%`);
+        link.style.setProperty("--gy", `${(y * 100).toFixed(1)}%`);
+      });
+      link.addEventListener("pointerleave", () => {
+        link.classList.remove("tilting");
+        link.style.removeProperty("--rx");
+        link.style.removeProperty("--ry");
+      });
+    });
+  }
+  // their photos load when the tab first opens, then fade in instead of popping in
+  document.querySelectorAll(".oc-photo img").forEach(img => {
+    const show = () => img.parentElement.classList.add("in");
+    if (img.complete && img.naturalWidth) show();
+    else ["load", "error"].forEach(ev => img.addEventListener(ev, show, { once: true }));
   });
 
   // experience: the card you point at, tap or tab into opens up
@@ -897,8 +964,8 @@
     const saved = anims.map(a => a.currentTime);
     anims.forEach(a => { try { a.currentTime = a.effect.getComputedTiming().endTime; } catch (err) {} });
     const out = [];
-    hello.querySelectorAll(".hi, #name, #roles, .meta, .cta .btn, .hint mark").forEach(el => {
-      if (el.matches(".btn, mark")) { out.push(el.getBoundingClientRect()); return; }
+    hello.querySelectorAll(".hi, #name, #roles, .meta, .cta a, .hint mark").forEach(el => {
+      if (el.matches(".cta a, mark")) { out.push(el.getBoundingClientRect()); return; }
       const range = document.createRange();
       range.selectNodeContents(el);
       for (const b of range.getClientRects()) if (b.width > 2 && b.height > 2) out.push(b);
@@ -1152,15 +1219,6 @@
     const paused = b.parentElement.classList.toggle("paused");
     b.setAttribute("aria-label", paused ? "Play the screenshots" : "Pause the screenshots");
   });
-  // footer: copy the email address
-  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
-    const v = b.dataset.copy;
-    try { await navigator.clipboard.writeText(v); }
-    catch (err) { const t = document.createElement("textarea"); t.value = v; document.body.append(t); t.select(); document.execCommand("copy"); t.remove(); }
-    b.textContent = "copied ✓";
-    const live = b.parentElement.querySelector("[aria-live]"); if (live) live.textContent = "email address copied";
-    clearTimeout(b._t); b._t = setTimeout(() => { b.textContent = "copy"; if (live) live.textContent = ""; }, 1600);
-  }));
   document.querySelectorAll("[data-case]").forEach(a => a.addEventListener("click", e => {
     e.preventDefault();
     openPaper(a.dataset.case, a);
