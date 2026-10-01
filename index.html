@@ -156,6 +156,9 @@
   .paper-icon { position: relative; overflow: hidden; width: 76px; height: 76px; margin: 0 auto; border-radius: 22px; display: grid; place-items: center; color: #fff;
     background: linear-gradient(160deg, #9aa6f2, #5563b0 55%, #3d4a9a); box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -6px 12px rgba(0,0,0,.14), 0 12px 26px -10px rgba(85,99,176,.7); }
   .paper-icon::after { content: ""; position: absolute; left: 9%; right: 9%; top: 5%; height: 46%; border-radius: 18px 18px 50% 50%; background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,0)); pointer-events: none; }
+  .paper-icon.is-img { width: 96px; height: 96px; border-radius: 26px; background: #dddddd; box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 0 0 1px rgba(0,0,0,.04), 0 12px 26px -10px rgba(22,34,79,.35); }
+  .paper-icon.is-img::after { opacity: .45; }
+  .paper-icon.is-img img { display: block; width: 100%; height: 100%; }
   .paper-icon svg { position: relative; z-index: 1; width: 46px; height: 46px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.2)); }
   .paper h2 { margin: 26px 0 0; font-size: clamp(36px, 5.4vw, 60px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.04; }
   .paper-tag { margin: 18px auto 0; max-width: 40em; font-size: clamp(17px, 1.7vw, 20px); line-height: 1.45; letter-spacing: -0.015em; color: #6b7086; }
@@ -818,11 +821,11 @@
   };
   const papers = {
     chess: {
-      icon: "pawn",
+      icon: "pawn", iconImg: "chess-icon.png",
       title: "Chess Learning Platform",
       tag: "An app where kids learn chess by playing it: homework, puzzles, live games and a leaderboard to climb.",
       meta: [["Type", "Web app"], ["Role", "Founder & Full-Stack Developer"], ["Year", "2025 – Present"]],
-      results: [["$10K", "revenue in under 5 months"], ["20+", "users"], ["1.5M", "puzzles"], ["<0.5s", "bot move time"]],
+      results: [["$10K", "revenue in under 5 months"], ["20+", "users"]],
       imgs: [
         ["brainychamps-home.webp", "A student's home screen with their rating, streak, gems and daily quests"],
         ["brainychamps-play.webp", "Play menu: play vs bot, play vs friend, or puzzle practice"],
@@ -841,7 +844,6 @@
       ],
       features: [
         ["Live Matches", "Real-time games between classmates, joined with a 6-character code and synced instantly with Supabase Realtime."],
-        ["Custom Bot", "A chess engine I wrote in TypeScript (minimax with alpha-beta pruning) that picks a move in under half a second."],
         ["Puzzle Database", "1.5M puzzles from Lichess, filtered by tactic theme and Elo-rated so every student trains at their level."],
         ["Homework", "I assign puzzle sets by tactic and level, and each student’s progress shows up on my teacher dashboard."],
         ["Gamification", "Streaks, daily quests, gems to spend in a rewards store, and class leaderboards."],
@@ -914,7 +916,9 @@
     const list = rows => `<ul>${rows.map(([k, v]) => `<li${t(k + v)}><b>${esc(k)}</b>: ${esc(v)}</li>`).join("")}</ul>`;
     paperBody.innerHTML = `
       <header class="paper-head">
-        <div class="paper-icon">${icons[c.icon] || icons.sparkle}</div>
+        ${c.iconImg
+          ? `<div class="paper-icon is-img"><img src="assets/works/${esc(c.iconImg)}" alt="" width="384" height="384"></div>`
+          : `<div class="paper-icon">${icons[c.icon] || icons.sparkle}</div>`}
         <h2 id="paper-title">${esc(c.title)}</h2>
         <p class="paper-tag"${t(c.tag)}>${esc(c.tag)}</p>
       </header>
