@@ -172,7 +172,7 @@
   .paper figure.is-loop { height: clamp(200px, min(30vw, 42vh), 440px); padding: 10px 0 24px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
   .pg-run { display: flex; height: 100%; width: max-content; animation: pg-loop calc(var(--n) * 5s) linear infinite; }
   .is-loop:hover .pg-run { animation-play-state: paused; }
-  .pg-slide { position: relative; flex: none; height: 100%; aspect-ratio: 16 / 9; margin-right: 16px; border-radius: 16px; overflow: hidden; background: #fff;
+  .pg-slide { position: relative; flex: none; height: 100%; aspect-ratio: var(--ratio, 16 / 9); margin-right: 16px; border-radius: 16px; overflow: hidden; background: #fff;
     box-shadow: 0 1px 2px rgba(22,34,79,.1), 0 10px 22px -8px rgba(22,34,79,.3); }
   .pg-slide::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
     background: linear-gradient(155deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.12) 32%, rgba(255,255,255,0) 48%), linear-gradient(0deg, rgba(31,45,102,.06), rgba(31,45,102,0) 40%);
@@ -470,7 +470,7 @@
     </a>
     <a class="folder royal reveal" href="#work-filo" data-case="filo">
       <span class="tab"></span><span class="back"></span>
-      <span class="sheet"><span class="shot-empty" aria-hidden="true"><i></i><i></i><i></i></span></span>
+      <span class="sheet"><img src="assets/works/filo-reply.webp" width="1280" height="800" alt=""></span>
       <span class="front">
         <span class="row"><span class="title">Filo</span><span class="yr">2026</span></span>
         <span class="sum">An AI agent that finds people on X who are ready to buy, and drafts the reply for you.</span>
@@ -864,7 +864,11 @@
       title: "Filo",
       tag: "An AI agent that finds people on X who are ready to buy, and drafts the reply for you.",
       meta: [["Type", "Web app"], ["Role", "Designer & Developer"], ["Year", "2026"]],
-      imgs: [],
+      ratio: "16 / 10",
+      imgs: [
+        ["filo-leads.webp", "Filo's dashboard: posts from X with buying signals, each tagged and scored out of 10"],
+        ["filo-reply.webp", "A lead scored 8 out of 10, with a drafted reply and tone options"],
+      ],
       story: [
         ["What I Made", ["Startups waste hours scrolling X looking for their first customers, so I wanted a tool that catches the posts where people are already asking for help."]],
         ["What It Does", ["You pick the keywords that matter to your product. Filo searches X for posts with buying signals, like someone asking for a tool or complaining about a competitor, scores each one from 1 to 10, and lines them up on a dashboard. For the best leads, it drafts a reply in the tone you choose, and you copy it over yourself, because it never posts on its own."]],
@@ -927,7 +931,7 @@
     const media = !c.imgs.length
       ? '<figure class="empty"><span class="shot-empty" aria-hidden="true"><i></i><i></i><i></i></span></figure>'
       : loop
-        ? `<figure class="is-loop"><div class="pg-run" style="--n:${c.imgs.length}">${[0, 1].map(copy => c.imgs.map(([f, alt]) =>
+        ? `<figure class="is-loop"><div class="pg-run" style="--n:${c.imgs.length}${c.ratio ? `;--ratio:${esc(c.ratio)}` : ""}">${[0, 1].map(copy => c.imgs.map(([f, alt]) =>
             `<div class="pg-slide"${copy ? ' aria-hidden="true"' : ""}><img src="assets/works/${esc(f)}" alt="${copy ? "" : esc(alt)}"></div>`).join("")).join("")}</div></figure>`
         : `<figure class="single"><img src="assets/works/${esc(c.imgs[0][0])}" alt="${esc(c.imgs[0][1])}"></figure>`;
     const list = rows => `<ul>${rows.map(([k, v]) => `<li${t(k + v)}><b>${esc(k)}</b>: ${esc(v)}</li>`).join("")}</ul>`;
