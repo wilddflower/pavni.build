@@ -58,6 +58,19 @@
   .bar nav { height: 100%; max-width: 1240px; margin: 0 auto; padding: 16px 40px 0; display: flex; justify-content: center; align-items: center; gap: 32px; font-size: 14px; font-weight: 500; letter-spacing: -0.02em; }
   .bar a { pointer-events: auto; color: var(--peri); text-decoration: none; text-underline-offset: 5px; text-decoration-thickness: 1px; transition: opacity .2s, color .2s; }
   .bar a:hover { color: var(--blue); text-decoration: underline; text-decoration-color: var(--blue); }
+  /* resume: a tiny note under the word (hover on laptops, click or tap anywhere) instead of a link that jumps straight to email */
+  .resume { position: relative; pointer-events: auto; }
+  .nav-btn { font: inherit; letter-spacing: inherit; color: var(--peri); background: none; border: 0; padding: 0; cursor: pointer; text-underline-offset: 5px; text-decoration-thickness: 1px; transition: color .2s; }
+  .nav-btn:hover, .resume.open .nav-btn { color: var(--blue); text-decoration: underline; text-decoration-color: var(--blue); }
+  .nav-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: 4px; }
+  .resume-note { position: absolute; top: calc(100% + 12px); left: 50%; transform: translate(-50%, -4px); white-space: nowrap; padding: 7px 13px; border-radius: 980px; font-size: 12.5px; font-weight: 500; letter-spacing: -0.01em; color: #1f2d66;
+    background: rgba(255,255,255,.92); -webkit-backdrop-filter: saturate(180%) blur(10px); backdrop-filter: saturate(180%) blur(10px);
+    box-shadow: 0 0 0 .5px rgba(31,45,102,.16), 0 2px 4px rgba(31,45,102,.06), 0 10px 22px -10px rgba(31,45,102,.35); opacity: 0; visibility: hidden; transition: opacity .2s, transform .2s, visibility .2s; }
+  .resume-note::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
+  .bar .resume-note a { color: var(--blue); text-decoration: underline; text-decoration-color: rgba(74,99,240,.4); }
+  .bar .resume-note a:hover { text-decoration-color: var(--blue); }
+  .resume.open .resume-note, .nav-btn:focus-visible + .resume-note, .resume-note:focus-within { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+  @media (hover: hover) and (pointer: fine) { .resume:hover .resume-note { opacity: 1; visibility: visible; transform: translate(-50%, 0); } }
   section, footer { scroll-margin-top: 72px; }
 
   /* hero */
@@ -455,6 +468,7 @@
     .pg-slide[aria-hidden="true"], .pg-toggle { display: none; }
     .swap, .xp.on .xp-desc, .oc:hover .oc-shine::before, .oc:focus-visible .oc-shine::before { animation: none; }
     .oc-card, .oc-card::after, .oc-photo, .oc-photo img { transition: none !important; }
+    .resume-note { transition: none; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
   }
 </style>
@@ -465,7 +479,10 @@
   <nav>
     <a href="#works">works</a>
     <a href="#about">about</a>
-    <a href="mailto:pavnilabade07@gmail.com?subject=Resume%20request" title="email me for my resume">resume</a>
+    <span class="resume">
+      <button class="nav-btn" type="button" aria-expanded="false" aria-controls="resume-note">resume</button>
+      <span class="resume-note" id="resume-note"><a href="mailto:pavnilabade07@gmail.com?subject=Resume%20request">email me</a> for my resume!</span>
+    </span>
   </nav>
 </header>
 
@@ -806,6 +823,13 @@
     if (img.complete && img.naturalWidth) show();
     else ["load", "error"].forEach(ev => img.addEventListener(ev, show, { once: true }));
   });
+
+  // resume: clicking or tapping "resume" pins a tiny note with the email link; a click elsewhere or Esc closes it
+  const resume = document.querySelector(".resume"), resumeBtn = resume.querySelector(".nav-btn");
+  const setResume = open => { resume.classList.toggle("open", open); resumeBtn.setAttribute("aria-expanded", String(open)); };
+  resumeBtn.addEventListener("click", () => setResume(!resume.classList.contains("open")));
+  document.addEventListener("click", e => { if (!resume.contains(e.target)) setResume(false); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") setResume(false); });
 
   // experience: the card you point at, tap or tab into opens up
   const xps = [...document.querySelectorAll(".xp")];
