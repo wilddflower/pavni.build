@@ -421,9 +421,14 @@
   .js .reveal.in { opacity: 1; transform: none; }
 
   @media (max-width: 1100px) {
-    .hero-in { height: auto; min-height: 100svh; flex-direction: column; align-items: flex-start; justify-content: center; gap: 20px; padding: 96px 40px 120px; }
-    .board { position: relative; inset: auto; width: min(100%, 480px); aspect-ratio: 5 / 8; align-self: center; margin: 16px 0 40px; --u: 1.3cqw; }
-    .item { left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); width: calc(var(--mw, var(--w)) * var(--u)); }
+    /* tablets + phones: the words and the magnets share one canvas (the magnets gather around the words, the way
+       Pavni laid them out on her iPad); positions are % of the canvas width, so each layout scales with the screen */
+    .hero-in { height: auto; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr); justify-content: stretch; align-items: start; gap: 0; padding: 96px 40px 72px; }
+    .hello, .board { grid-area: 1 / 1; }
+    .hello { position: relative; z-index: 1; }
+    /* a faint white halo keeps the words crisp if a star or a dragged magnet ends up behind them */
+    .hello .hi, .hello #name, .hello .roles, .hello .meta { text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 10px #fff; }
+    .board { position: relative; inset: auto; width: 100%; margin: 0; align-self: start; }
     .board .desk-only { display: none; }
     .xp-row { flex-direction: column; height: auto; }
     .xp, .xp.on { flex: none; background: #eef1fb; cursor: default; }
@@ -433,19 +438,14 @@
     .xp-go { background: #1f2d66; color: #fff; }
     .xp-pic { position: relative; inset: auto; width: 100%; height: 160px; margin-top: 18px; opacity: 1; transform: none; }
   }
-  @media (min-width: 761px) and (max-width: 1100px) {
-    /* tablets: the magnets gather around the words the way Pavni laid them out on her iPad. the words and the magnets share
-       one canvas, and --tx/--ty are % of the canvas width, so the whole arrangement scales with the screen */
-    .hero-in { display: grid; grid-template-columns: minmax(0, 1fr); justify-content: stretch; align-items: start; min-height: 0; padding: 96px 40px 72px; }
-    .hello, .board { grid-area: 1 / 1; }
-    .hello { position: relative; z-index: 1; }
-    .board { width: 100%; margin: 0; align-self: start; aspect-ratio: 740 / 760; --u: .8432cqw; }
-    .item { left: calc(var(--tx) * 1cqw); top: calc(var(--ty) * 1cqw); width: calc(var(--tw, var(--mw, var(--w))) * var(--u)); }
-  }
   @media (max-width: 760px) {
     :root { --edge: 20px; }
     .bar nav { gap: 24px; padding: 16px 20px 0; }
-    .hero-in { padding: 88px 20px 84px; }
+    .hero-in { padding: 88px 20px 40px; }
+    /* phones: the words keep to a ~230px column so the magnets have the right-hand side, like on the iPad */
+    .hello { max-width: 232px; }
+    .board { max-width: 470px; aspect-ratio: 350 / 708; --u: .85cqw; }
+    .item { left: calc(var(--px) * 1cqw); top: calc(var(--py) * 1cqw); width: calc(var(--pw) * 1cqw); }
     .name { font-size: clamp(72px, 23vw, 120px); }
     .section { padding: 88px 20px; }
     .works { padding: 88px 0 72px; }
@@ -468,6 +468,15 @@
     .links { margin: 0 0 0 -10px; }
     .contact { border-radius: 28px 28px 0 0; }
     .contact-in { padding: 72px 20px 32px; }
+  }
+  @media (min-width: 700px) and (max-width: 1100px) {
+    /* tablets (iPad mini and up): her iPad arrangement, --tx/--ty in % of the canvas width */
+    .hero-in { padding: 96px 40px 72px; }
+    .hello { max-width: none; }
+    .name { font-size: clamp(72px, min(11.5vw, 19.5vh), 180px); }
+    .board { max-width: none; }
+    .board { aspect-ratio: 740 / 760; --u: .8432cqw; }
+    .item { left: calc(var(--tx) * 1cqw); top: calc(var(--ty) * 1cqw); width: calc(var(--tw) * var(--u)); }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -514,21 +523,21 @@
       <p class="hint"><mark>drag the magnets around!</mark></p>
     </div>
     <div class="board" data-intro="place" role="group" aria-label="A collage of keepsakes held up by magnets. You can drag them around.">
-      <!-- to add a piece: <div class="item cut" style="--x:50;--y:50;--w:14;--r:-4deg;--mx:40;--my:40"><img src="assets/magnets/name.webp" width="…" height="…" alt="" draggable="false"></div>
-           --x/--y = where it sits on laptops (% of the hero area), --mx/--my = where it sits on phones + tablets,
-           --w = how big, --r = tilt; add "mag" to the class for a star magnet on top ("mag ceramic" for the blue star) -->
-      <div class="item confetti" style="--x:58.5;--y:-9.9;--w:54;--r:0deg;--mx:16.4;--my:11.9;--mw:60;--tx:33;--ty:24;--tw:64" aria-hidden="true"><img src="assets/magnets/confetti.webp" width="551" height="775" alt="" draggable="false"></div>
-      <div class="item cut pressed" style="--x:63.1;--y:10.2;--w:22;--r:-12deg;--mx:34;--my:30;--mw:25;--tx:48.4;--ty:26.2"><img src="assets/magnets/flowers.webp" width="520" height="578" alt="Pressed blue flowers" draggable="false"></div>
-      <div class="item cut mag" style="--x:74.6;--y:74.6;--w:25;--r:10deg;--mx:34;--my:73;--mw:32;--tx:3.6;--ty:64.6"><img src="assets/magnets/record.webp" width="520" height="520" alt="A record" draggable="false"></div>
-      <div class="item cut" style="--x:87.8;--y:-9.9;--w:15;--r:3deg;--mx:76;--my:2;--mw:15;--tx:86.6;--ty:28.2"><img src="assets/magnets/clip-lake.webp" width="440" height="1189" alt="Two polaroids held by a silver clip: a sunset over a lake, and Pavni looking out over the water" draggable="false"></div>
-      <div class="item cut" style="--x:38.5;--y:-2.7;--w:44;--r:-4deg;--mx:2;--my:2;--mw:50;--tx:60.1;--ty:-3.5"><img src="assets/magnets/camera.webp" width="960" height="715" alt="Pavni on the screen of a little silver camera" draggable="false"></div>
-      <div class="item cut flat" style="--x:89.7;--y:60.2;--w:24;--r:6deg;--mx:58;--my:55;--mw:32;--tx:64.6;--ty:56.6"><img src="assets/magnets/polaroid-walk.webp" width="760" height="590" alt="A polaroid with little bows and stars: Pavni and a friend walking down a sunny tree-lined street" draggable="false"></div>
-      <div class="item cut flat mag ceramic" style="--x:51.7;--y:57.9;--w:36;--r:-3deg;--mx:3;--my:50;--mw:48;--tx:30.7;--ty:68.4"><img src="assets/magnets/postcard-nyc.webp" width="720" height="463" alt="A New York postcard" draggable="false"></div>
-      <div class="item cut" style="--x:66.6;--y:42.6;--w:21;--r:7deg;--mx:56;--my:37;--mw:30;--tx:52.3;--ty:44.5"><img src="assets/magnets/mixtape.webp" width="560" height="359" alt="A mix tape" draggable="false"></div>
-      <div class="item cut flat" style="--x:42.0;--y:49.7;--w:14;--r:7deg;--mx:5;--my:37;--mw:18;--tx:27.3;--ty:49.2"><img src="assets/magnets/stamp-wave.webp" width="520" height="422" alt="A Great Wave stamp" draggable="false"></div>
-      <div class="item cut" style="--x:84.6;--y:-5.2;--w:10;--r:0deg;--mx:67;--my:0;--mw:11;--tx:81.4;--ty:29.5"><img src="assets/magnets/eight-ball.webp" width="320" height="320" alt="An 8-ball" draggable="false"></div>
+      <!-- to add a piece: <div class="item cut" style="--x:50;--y:50;--w:14;--r:-4deg;--tx:40;--ty:40;--tw:14;--px:40;--py:40;--pw:30"><img src="assets/magnets/name.webp" width="…" height="…" alt="" draggable="false"></div>
+           --x/--y = where it sits on laptops (% of the hero area), --w = how big there; --tx/--ty/--tw = tablets and
+           --px/--py/--pw = phones (all three in % of the hero's width), --r = tilt; add "mag" to the class for a star magnet on top ("mag ceramic" for the blue star) -->
+      <div class="item confetti" style="--x:58.5;--y:-9.9;--w:54;--r:0deg;--tx:33;--ty:24;--tw:64;--px:44.3;--py:89.1;--pw:65.7" aria-hidden="true"><img src="assets/magnets/confetti.webp" width="551" height="775" alt="" draggable="false"></div>
+      <div class="item cut pressed" style="--x:63.1;--y:10.2;--w:22;--r:-12deg;--tx:48.4;--ty:26.2;--tw:25;--px:65.7;--py:33.1;--pw:28.6"><img src="assets/magnets/flowers.webp" width="520" height="578" alt="Pressed blue flowers" draggable="false"></div>
+      <div class="item cut mag" style="--x:74.6;--y:74.6;--w:25;--r:10deg;--tx:3.6;--ty:64.6;--tw:32;--px:-2.3;--py:157.7;--pw:38.9"><img src="assets/magnets/record.webp" width="520" height="520" alt="A record" draggable="false"></div>
+      <div class="item cut" style="--x:87.8;--y:-9.9;--w:15;--r:3deg;--tx:86.6;--ty:28.2;--tw:15;--px:81.1;--py:56.6;--pw:17.1"><img src="assets/magnets/clip-lake.webp" width="440" height="1189" alt="Two polaroids held by a silver clip: a sunset over a lake, and Pavni looking out over the water" draggable="false"></div>
+      <div class="item cut" style="--x:38.5;--y:-2.7;--w:44;--r:-4deg;--tx:60.1;--ty:-3.5;--tw:50;--px:61.7;--py:-2.9;--pw:41.7"><img src="assets/magnets/camera.webp" width="960" height="715" alt="Pavni on the screen of a little silver camera" draggable="false"></div>
+      <div class="item cut flat" style="--x:89.7;--y:60.2;--w:24;--r:6deg;--tx:64.6;--ty:56.6;--tw:32;--px:55.4;--py:124.0;--pw:42.9"><img src="assets/magnets/polaroid-walk.webp" width="760" height="590" alt="A polaroid with little bows and stars: Pavni and a friend walking down a sunny tree-lined street" draggable="false"></div>
+      <div class="item cut flat mag ceramic" style="--x:51.7;--y:57.9;--w:36;--r:-3deg;--tx:30.7;--ty:68.4;--tw:48;--px:20.6;--py:145.1;--pw:56.0"><img src="assets/magnets/postcard-nyc.webp" width="720" height="463" alt="A New York postcard" draggable="false"></div>
+      <div class="item cut" style="--x:66.6;--y:42.6;--w:21;--r:7deg;--tx:52.3;--ty:44.5;--tw:30;--px:55.4;--py:99.4;--pw:36.6"><img src="assets/magnets/mixtape.webp" width="560" height="359" alt="A mix tape" draggable="false"></div>
+      <div class="item cut flat" style="--x:42.0;--y:49.7;--w:14;--r:7deg;--tx:27.3;--ty:49.2;--tw:18;--px:5.7;--py:125.7;--pw:23.4"><img src="assets/magnets/stamp-wave.webp" width="520" height="422" alt="A Great Wave stamp" draggable="false"></div>
+      <div class="item cut" style="--x:84.6;--y:-5.2;--w:10;--r:0deg;--tx:81.4;--ty:29.5;--tw:11;--px:69.1;--py:60.6;--pw:13.1"><img src="assets/magnets/eight-ball.webp" width="320" height="320" alt="An 8-ball" draggable="false"></div>
       <div class="item cut desk-only" style="--x:91.9;--y:42.4;--w:10;--r:-8deg"><img src="assets/magnets/key-p.webp" width="360" height="342" alt="A P keycap" draggable="false"></div>
-      <div class="item cut" style="--x:43.6;--y:83.2;--w:14;--r:-8deg;--mx:8;--my:78;--mw:18;--tx:-4.5;--ty:62.8"><img src="assets/magnets/crane.webp" width="420" height="346" alt="A paper crane" draggable="false"></div>
+      <div class="item cut" style="--x:43.6;--y:83.2;--w:14;--r:-8deg;--tx:-4.5;--ty:62.8;--tw:18;--px:-5.1;--py:145.1;--pw:22.9"><img src="assets/magnets/crane.webp" width="420" height="346" alt="A paper crane" draggable="false"></div>
       <div class="item cut desk-only" style="--x:76.7;--y:10.4;--w:12;--r:0deg"><img src="assets/magnets/figure.webp" width="420" height="726" alt="A little figure with glasses typing on a laptop, a cat on its head" draggable="false"></div>
     </div>
   </div>
@@ -860,7 +869,7 @@
   const board = document.querySelector(".board");
   const hero = document.querySelector(".hero");
   const stacked = matchMedia("(max-width: 1100px)");
-  const tablet = matchMedia("(min-width: 761px) and (max-width: 1100px)");
+  const tablet = matchMedia("(min-width: 700px) and (max-width: 1100px)");
   const sideways = (dx, dy) => Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy);
   let stack = 10;
   board.querySelectorAll(".item:not(.confetti)").forEach(item => {
@@ -908,12 +917,13 @@
         const w = board.clientWidth, h = board.clientHeight;
         const x = Math.min(Math.max(left0 + lastX - startX, minX), maxX);
         const y = Math.min(Math.max(top0 + lastY - startY, minY), maxY);
-        if (tablet.matches) {
-          item.style.setProperty("--tx", x / w * 100);
-          item.style.setProperty("--ty", y / w * 100);
+        if (stacked.matches) {
+          // tablets and phones store both as % of the canvas width
+          item.style.setProperty(tablet.matches ? "--tx" : "--px", x / w * 100);
+          item.style.setProperty(tablet.matches ? "--ty" : "--py", y / w * 100);
         } else {
-          item.style.setProperty(stacked.matches ? "--mx" : "--x", x / w * 100);
-          item.style.setProperty(stacked.matches ? "--my" : "--y", y / h * 100);
+          item.style.setProperty("--x", x / w * 100);
+          item.style.setProperty("--y", y / h * 100);
         }
       };
       const drop = () => {
@@ -1007,7 +1017,7 @@
   // first layout: if a magnet would cover the words on this screen size, slide it right just enough.
   // (pieces someone has dragged are left where they put them)
   const hello = document.querySelector(".hello");
-  items.forEach(el => { el.dataset.x0 = el.style.getPropertyValue("--x"); el.dataset.tx0 = el.style.getPropertyValue("--tx"); });
+  items.forEach(el => { el.dataset.x0 = el.style.getPropertyValue("--x"); el.dataset.tx0 = el.style.getPropertyValue("--tx"); el.dataset.px0 = el.style.getPropertyValue("--px"); });
   function textBoxes() {
     // measure where the words END UP, even while they're still hopping in
     const anims = hello.getAnimations({ subtree: true });
@@ -1016,20 +1026,20 @@
     const out = [];
     hello.querySelectorAll(".hi, #name, #roles, .meta, .cta a, .hint mark").forEach(el => {
       if (el.matches(".cta a, mark")) { out.push(el.getBoundingClientRect()); return; }
+      // measure the visible words only, not the hidden one-line copy kept for screen readers
       const range = document.createRange();
-      range.selectNodeContents(el);
+      range.selectNodeContents(el.querySelector("[aria-hidden]") || el);
       for (const b of range.getClientRects()) if (b.width > 2 && b.height > 2) out.push(b);
     });
     anims.forEach((a, k) => { try { a.currentTime = saved[k]; } catch (err) {} });
     return out;
   }
   function clearText() {
-    // laptops nudge --x; tablets (where the magnets share the canvas with the words) nudge --tx; phones stack them below
-    const tab = tablet.matches;
-    if (stacked.matches && !tab) return;
-    const prop = tab ? "--tx" : "--x", key = tab ? "tx0" : "x0";
+    // laptops nudge --x, tablets --tx, phones --px (on tablets and phones the magnets share the canvas with the words)
+    const tab = tablet.matches, ph = stacked.matches && !tab;
+    const prop = tab ? "--tx" : ph ? "--px" : "--x", key = tab ? "tx0" : ph ? "px0" : "x0";
     // on tablets a magnet's tilted box may overlap the words by ~28px (the transparent edges of her flowers do at 820px)
-    const words = textBoxes(), bb = board.getBoundingClientRect(), pad = tab ? -28 : 16;
+    const words = textBoxes(), bb = board.getBoundingClientRect(), pad = tab ? -28 : ph ? -8 : 16;
     for (const el of items) {
       if (el.classList.contains("moved")) continue;
       el.style.setProperty(prop, el.dataset[key]);
